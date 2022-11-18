@@ -4,12 +4,15 @@
 class Exposicao
 {
 private:
-    std::string periodo;
-    int ID;
-    bool acessibilidade;
+    int _semana;
+    int _ID;
+    bool _acessibilidade;
 public:
-    Exposicao(/* args */);
+    Exposicao(int semana, int ID, bool acessibilidade);
     ~Exposicao();
     void vigilancia();
     void calcularPreco();
+    void get_semana();
+    void get_ID();
+    void get_acessiblidade();
     };
