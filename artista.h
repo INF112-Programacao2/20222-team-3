@@ -10,7 +10,7 @@ std::string nome_artista;
 int **obras;//duvida
 
 public:
-Artista();
+Artista(int id_artista_, int numero_obras_, std:: string nome_artista_);
 ~Artista();
 int get_numero_obras();
 int get_id_artista();

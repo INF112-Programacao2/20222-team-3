@@ -5,10 +5,10 @@
 class Obra {
 private:
 int id_obra;
-bool arquivada = false;
+bool arquivada;
 std::string nome_obra;
 public:
-Obra();
+Obra(int id_obra_, bool arquivada_, std::string nome_obra_);
 ~Obra();
 int get_id_obra();
 bool get_arquivada();
