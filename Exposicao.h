@@ -1,18 +1,24 @@
-#pragma once 
-#include <cstring>
+#pragma once
+#include "Movimento.h"
 
-class Exposicao
+class Exposicao : public Movimento
 {
 private:
     int _semana;
-    int _ID;
     bool _acessibilidade;
+    float _preco;
+    int _visitantes;
+    int **_vigilancia;  //IDs dos funcionarios
+    int **_vigilancia_noturna;  //IDs dos funcionarios
+    int _id_guia;
 public:
-    Exposicao(int semana, int ID, bool acessibilidade);
+    Exposicao(int semana,bool acessibilidade,float preco,int visitantes,int id_guia);
     ~Exposicao();
-    void vigilancia();
-    void calcularPreco();
-    void get_semana();
-    void get_ID();
-    void get_acessiblidade();
-    };
+    void ver_vigilancia();
+    void ver_vigilancia_noturna();
+    float get_preco();
+    int get_semana();
+    bool get_acessiblidade();
+    int get_visitantes();
+    int get_id_guia();
+};
