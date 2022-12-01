@@ -3,21 +3,21 @@
 
 #include <string>
 #include "artista.h"
-class movimento
+class Movimento
 {
 private:
     int _ID;
     std::string _nome;
     int _nArtista; //numero de artistas
-    Artista** artistas;
+    Artista** _artistas;
     
 public:
-    void get_nArtista();
+    int get_nArtista();
     void ver_obras();
-    Artista ver_artistas();
+    void ver_artistas();
     int calcular_popularidade();
-    movimento(int ID, std::string nome, int _nArtistas);
-    ~movimento();
+    Movimento(int ID, std::string nome, int _nArtistas);
+    ~Movimento();
 
 };
 
