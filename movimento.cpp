@@ -42,5 +42,9 @@ int Movimento::calcular_popularidade(){
 }
 
 void Movimento::ver_obras(){
-    //???????
+
+    for(int i = 0; i<_nArtista; i++){
+
+        _artistas[i]->ver_obras();
+    }
 }
