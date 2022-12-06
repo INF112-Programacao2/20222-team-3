@@ -1,5 +1,5 @@
 #pragma once
-#include <cstring>
+#include <string>
 #include "Movimento.h"
 
 class Exposicao : public Movimento
@@ -11,9 +11,11 @@ private:
     int **_vigilancia;  //IDs dos funcionarios
     int **_vigilancia_noturna;  //IDs dos funcionarios
     bool _alocado;
+    
 public:
     Exposicao(std::string nome,int numero_artistas,int semana,bool acessibilidade,int visitantes);
     ~Exposicao();
+    
     void aloca_vigilancia();
     void desaloca_vigilancia();
     void ver_vigilancia();
