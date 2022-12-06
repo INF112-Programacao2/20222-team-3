@@ -1,21 +1,25 @@
-#include "obra.h"
+#include "Obra.h"
 
+int Obra::_id_geral=100;
 
-Obra::Obra(int id_obra_, bool arquivada_, std::string nome_obra_)
+Obra::Obra(std::string nome)
 {
-    id_obra=id_obra_;
-    arquivada=arquivada_;
-    nome_obra=nome_obra_;
+    _id=_id_geral++;
+    _arquivada=false;
+    _nome=nome;
 }
 
-int Obra::get_id_obra(){
-    return id_obra;
+int Obra::get_id(){
+    return _id;
 }
-std::string Obra::get_nome_obra(){
-    return nome_obra;
+std::string Obra::get_nome(){
+    return _nome;
 }
 bool Obra::get_arquivada(){
-    return arquivada;
+    return _arquivada;
+}
+void Obra::set_arquivada(bool arquivada){
+    _arquivada=arquivada;
 }
 Obra::~Obra()
 {};
