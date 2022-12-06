@@ -16,12 +16,13 @@ void Gerente::carregar_sistema(){
         std::cin>>nome>>numero_artistas>>acessibilidade>>visitantes;
         _exposicoes[i]=new Exposicao(nome,numero_artistas,semana,acessibilidade,visitantes);
         _exposicoes[i]->carregar_sistema();
+    }
         _segurancas=new Seguranca*[_numero_segurancas];
-        for(int j=0; j < _numero_segurancas)
+        for(int j=0; j < _numero_segurancas;j++)
         {
-            bool horario_norturno;
-            std::cin>>salario>>carga_horaria>>horario_norturno;
-            _segurancas[j]= new Seguranca(salario, carga_horaria, horario_norturno)
+            bool horario_noturno;
+            std::cin>>salario>>carga_horaria>>horario_noturno;
+            _segurancas[j]= new Seguranca(salario, carga_horaria, horario_noturno)
         }
         _guias=new Guia*[_numero_guias];
         for(int k = 0; k < _numero_guias; k++)
@@ -31,7 +32,7 @@ void Gerente::carregar_sistema(){
             std::cin >> salario >> carga_horaria >> acessibilidade >> especialidade;
             _guias[k]= new Guia(salario, carga_horaria, acessibilidade, especialidade);
         }
-    }
+    
     _carregado=true;
 }
 void Gerente::descarregar_sistema(){
@@ -104,7 +105,50 @@ void Gerente::arquivar_obra(int ID_obra){
                 }
 }
 
-void Gerente::atribuir_funcionarios(int ID_exposicao){} //em construcao
+void Gerente::atribuir_funcionarios(int ID_exposicao){
+    Exposicao* exposicao;
+    for(int i=0;i<_numero_exposicoes;i++)
+        if(_exposicoes[i]->get_id()==ID_exposicao){
+            exposicao=_exposicoes[i];
+            break;
+        }
+        
+    for(int i=0;i<7;i++){  //para cada dia da semana
+
+        //escolha do guia
+        Guia* guia;
+        for(int j=0;j<_numero_guias;j++)
+            if(exposicao->get_acessibilidade()==_guias[j]->get_acessibilidade() && exposicao->calcular_popularidade()==_guias[j]->get_especialidade()){
+                guia=_guias[j];
+                break;
+            }
+        exposicao->get_vigilancia()[i][0]=guia->get_id();  //primeira posicao guarda o guia
+
+        //escolha dos segurancas
+        Seguranca* seguranca;
+        //horario diurno
+        int vigilancia_necessaria=exposicao->calcular_popularidade();
+        for(int j=0;j<_numero_segurancas;j++)
+            if(_segurancas[j]->get_carga_horaria()[i]=='1'){  //se o seguranca trabalha no dia da semana i
+                seguranca=_segurancas[j];  //escolhe seguranca
+                exposicao->get_vigilancia()[i][vigilancia_necessaria]=seguranca->get_id();  //guarda seu id no vetor da exposicao
+                vigilancia_necessaria--;  //menos um seguranca faltando
+                if(vigilancia_necessaria<1) //se ficar menor que 1, exposicao ja tem segurancas suficientes
+                    break;
+            }
+        //horario noturno
+        vigilancia_necessaria=exposicao->calcular_popularidade()/2;
+        for(int j=0;j<_numero_segurancas;j++)
+            if(_segurancas[j]->get_carga_horaria()[i]=='1' && _segurancas[j]->get_horario_noturno()==true){ 
+                seguranca=_segurancas[j]; 
+                exposicao->get_vigilancia_noturna()[i][vigilancia_necessaria]=seguranca->get_id();  
+                vigilancia_necessaria--; 
+                if(vigilancia_necessaria<1) 
+                    break;
+            }
+
+    }
+}
 
 float Gerente::calcular_lucro(){
     float receita=0,despesa=0;
