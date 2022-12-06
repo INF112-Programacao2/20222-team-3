@@ -1,10 +1,12 @@
 #include "Gerente.h"
 
-Gerente::Gerente(int id,float salario,int numero_exposicoes,int numero_segurancas,int numero_guias):
-    Pessoa(id,salario),_numero_exposicoes(numero_exposicoes),_numero_segurancas(numero_segurancas),_numero_guias(numero_guias),_carregado(false){}
+Gerente::Gerente(float salario,int numero_exposicoes,int numero_segurancas,int numero_guias):
+    Pessoa(salario),_numero_exposicoes(numero_exposicoes),_numero_segurancas(numero_segurancas),_numero_guias(numero_guias),_carregado(false){}
 
 void Gerente::carregar_sistema(){
-    _exposicoes=new *Exposicao[_numero_exposicoes];
+    float salario; 
+    std::string carga_horaria; 
+    _exposicoes=new Exposicao*[_numero_exposicoes];
     for(int i=0;i<_numero_exposicoes;i++){
         std::string nome;
         int numero_artistas;
@@ -14,8 +16,22 @@ void Gerente::carregar_sistema(){
         std::cin>>nome>>numero_artistas>>acessibilidade>>visitantes;
         _exposicoes[i]=new Exposicao(nome,numero_artistas,semana,acessibilidade,visitantes);
         _exposicoes[i]->carregar_sistema();
+        _segurancas=new Seguranca*[_numero_segurancas];
+        for(int j=0; j < _numero_segurancas)
+        {
+            bool horario_norturno;
+            std::cin>>salario>>carga_horaria>>horario_norturno;
+            _segurancas[j]= new Seguranca(salario, carga_horaria, horario_norturno)
+        }
+        _guias=new Guia*[_numero_guias];
+        for(int k = 0; k < _numero_guias; k++)
+        {
+            bool acessibilidade;
+            int especialidade;
+            std::cin >> salario >> carga_horaria >> acessibilidade >> especialidade;
+            _guias[k]= new Guia(salario, carga_horaria, acessibilidade, especialidade);
+        }
     }
-    //falta carregar os segurancas e guias no sistema
     _carregado=true;
 }
 void Gerente::descarregar_sistema(){
@@ -23,8 +39,17 @@ void Gerente::descarregar_sistema(){
         return;
     for(int i=0;i<_numero_exposicoes;i++)
         _exposicoes[i]->descarregar_sistema();
+    for(int j = 0; j < _numero_segurancas; j++)
+    {
+        delete _segurancas[j];
+    }
+    for(int k = 0; k < _numero_guias; k++)
+    {
+        delete _guias[k];
+    }
+    delete _segurancas;
+    delete _guias;
     delete _exposicoes;
-    //falta descarregar os segurancas e guias no sistema 
     _carregado=false;        
 }
 Gerente::~Gerente(){

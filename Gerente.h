@@ -15,7 +15,7 @@ private:
     int _numero_guias;
     bool _carregado;
 public:
-    Gerente(int id,float salario,int numero_exposicoes,int numero_segurancas,int numero_guias);
+    Gerente(float salario,int numero_exposicoes,int numero_segurancas,int numero_guias);
     void carregar_sistema();  //para preencher o acervo de movimentos, artistas e obras
     void descarregar_sistema();
     ~Gerente();
