@@ -1,12 +1,7 @@
 #include "Gerente.h"
 
-Gerente::Gerente(float salario,int numero_exposicoes,int numero_segurancas,int numero_guias):
-    Pessoa(salario),_numero_exposicoes(numero_exposicoes),_numero_segurancas(numero_segurancas),_numero_guias(numero_guias),_carregado(false){}
-
-Gerente::~Gerente(){
-    if(_carregado)
-        descarregar_sistema();
-}
+Gerente::Gerente(int id,float salario,int numero_exposicoes,int numero_segurancas,int numero_guias):
+    Pessoa(id,salario),_numero_exposicoes(numero_exposicoes),_numero_segurancas(numero_segurancas),_numero_guias(numero_guias),_carregado(false){}
 
 void Gerente::carregar_sistema(){
     _exposicoes=new *Exposicao[_numero_exposicoes];
@@ -18,31 +13,23 @@ void Gerente::carregar_sistema(){
         int visitantes;
         std::cin>>nome>>numero_artistas>>acessibilidade>>visitantes;
         _exposicoes[i]=new Exposicao(nome,numero_artistas,semana,acessibilidade,visitantes);
-        _exposicoes[i]->get_artistas()=new *Artista[numero_artistas];
-        for(int j=0;j<numero_artistas;j++){
-            int popularidade;
-            int numero_obras;
-            std::cin>>nome>>popularidade>>numero_obras;
-            _exposicoes[i]->get_artistas()[j]=new Artista(nome,popularidade,numero_obras);
-            _exposicoes[i]->get_artistas()[j]=new *Obra[numero_obras];
-            for(int k=0;k<numero_obras;k++){
-                std::cin>>nome;
-                _exposicoes[i]->get_artistas()[j]->get_obras()[k]=new Obra(nome);
-            }      
-        }
+        _exposicoes[i]->carregar_sistema();
     }
     //falta carregar os segurancas e guias no sistema
     _carregado=true;
 }
 void Gerente::descarregar_sistema(){
-    for(int i=0;i<_numero_exposicoes;i++){
-        for(int j=0;j<_exposicoes[i]->get_numero_artistas();j++)
-            delete _exposicoes[i]->get_artistas()[j]->get_obras();
-        delete exposicoes[i]->get_artistas();
-    }
+    if(!_carregado)
+        return;
+    for(int i=0;i<_numero_exposicoes;i++)
+        _exposicoes[i]->descarregar_sistema();
     delete _exposicoes;
     //falta descarregar os segurancas e guias no sistema 
     _carregado=false;        
+}
+Gerente::~Gerente(){
+    if(_carregado)
+        descarregar_sistema();
 }
 
 Exposicao** Gerente::get_exposicoes(){

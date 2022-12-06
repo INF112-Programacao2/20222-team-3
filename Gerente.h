@@ -15,7 +15,9 @@ private:
     int _numero_guias;
     bool _carregado;
 public:
-    Gerente(float salario,int numero_exposicoes,int numero_segurancas,int numero_guias);
+    Gerente(int id,float salario,int numero_exposicoes,int numero_segurancas,int numero_guias);
+    void carregar_sistema();  //para preencher o acervo de movimentos, artistas e obras
+    void descarregar_sistema();
     ~Gerente();
     Exposicao** get_exposicoes();
     Seguranca** get_segurancas();
@@ -24,8 +26,7 @@ public:
     int get_numero_segurancas();
     int get_numero_guias();
     bool get_carregado();
-    void carregar_sistema();  //para preencher o acervo de movimentos, obras e artistas
-    void descarregar_sistema();
+    
     void ver_exposicoes();
     void ver_segurancas();
     void ver_guias();
