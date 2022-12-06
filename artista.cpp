@@ -15,10 +15,11 @@ Artista::Artista(int numero_obras, std::string nome, int popularidade)
 void Artista::carregar_sistema()
 {
     _obras = new Obra *[_numero_obras];
+    std::string nome;
     for (int i = 0; i < _numero_obras; i++)
     {
         std::cin >> nome;
-        _obras[k] = new Obra(nome);
+        _obras[i] = new Obra(nome);
     }
     _carregado=true;
 }
@@ -43,9 +44,9 @@ Artista::~Artista()
 
 void Artista::ver_obras()
 {
-    for (int i = 0; i < numero_obras; i++)
+    for (int i = 0; i < _numero_obras; i++)
     {
-        std::cout << obras[i]->get_nome() << std::endl;
+        std::cout << _obras[i]->get_nome() << std::endl;
     }
 };
 
