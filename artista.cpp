@@ -1,39 +1,75 @@
-#include "artista.h"
-#include "obra.h"
+#include "Artista.h"
+#include "Obra.h"
 
+int Artista::_id_geral=200;
 
-
-Artista::Artista(int id_artista_, int numero_obras_, std:: string nome_artista_, int popularidade)
+Artista::Artista(int numero_obras, std::string nome, int popularidade)
 {
-    id_artista=id_artista_;
-    numero_obras=numero_obras_;
-    nome_artista=nome_artista_;
+    _id = _id_geral++;
+    _numero_obras = numero_obras;
+    _nome = nome;
     _popularidade = popularidade;
-    obras = new Obra*[numero_obras];
-}
+    _carregado = false;
+};
 
-int Artista::get_popularidade(){
-    return _popularidade;
-}
-
-int Artista::get_numero_obras(){
-    return numero_obras;
-}
-int Artista::get_id_artista(){
-    return id_artista;
-}
-std::string Artista::get_nome_artista(){
-    return nome_artista;
-}
-Artista::~Artista()
-{};
-
-void Artista::ver_obras(){
-
-    for(int i =0; i<numero_obras; i++){
-
-        std::cout << obras[i]->get_nome_obra() << std::endl;
-
+void Artista::carregar_sistema()
+{
+    _obras = new Obra *[_numero_obras];
+    for (int i = 0; i < _numero_obras; i++)
+    {
+        std::cin >> nome;
+        _obras[k] = new Obra(nome);
     }
-
+    _carregado=true;
 }
+
+void Artista::descarregar_sistema()
+{
+    if(!_carregado)
+        return;
+    for(int i = 0; i < _numero_obras; i++)
+    {
+        delete _obras[i];
+    }
+    delete _obras;
+    _carregado=false;
+}
+
+Artista::~Artista()
+{
+    if (_carregado)
+        descarregar_sistema();    
+};
+
+void Artista::ver_obras()
+{
+    for (int i = 0; i < numero_obras; i++)
+    {
+        std::cout << obras[i]->get_nome() << std::endl;
+    }
+};
+
+int Artista::get_popularidade()
+{
+    return _popularidade;
+};
+
+int Artista::get_numero_obras()
+{
+    return _numero_obras;
+};
+
+int Artista::get_id()
+{
+    return _id;
+};
+
+std::string Artista::get_nome()
+{
+    return _nome;
+};
+
+bool Artista::get_carregado()
+{
+    return _carregado;
+};
