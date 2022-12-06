@@ -1,26 +1,45 @@
-#include "movimento.h"
 #include <iostream>
-#include "artista.h"
+#include "Movimento.h"
+#include "Artista.h"
 
-Movimento::Movimento(int ID, std::string nome, int nArtista){
-    _ID = ID;
+Movimento::Movimento(int id, std::string nome, int numero_artistas){
+    _id = id;
     _nome = nome;
-    _nArtista = nArtista;
-    _artistas = new Artista*[_nArtista];
+    _numero_artistas = numero_artistas;
+    _carregado=false;
 }
 
+void Movimento::carregar_sistema(){
+    _artistas=new Artista*[_numero_artistas];
+        for(int i=0;i<_numero_artistas;i++){
+            int popularidade;
+            int numero_obras;
+            std::cin>>nome>>popularidade>>numero_obras;
+            _artistas[i]=new Artista(nome,popularidade,numero_obras);
+            _artistas[i]->carregar_sistema();
+        }
+    _carregado=true;
+}
+void Movimento::descarregar_sistema(){
+    if(!_carregado)
+        return;
+    for(int i=0;i<_numero_artistas;i++)
+        _artistas[i]->descarregar_sistema();
+    delete _artistas;
+    _carregado=false;
+}
 Movimento::~Movimento(){
-    
-    delete[] _artistas;
+    if(_carregado)
+        descarregar_sistema();
 
 }
 
-int Movimento::get_nArtista(){
-    return _nArtista;
+int Movimento::get_numero_artistas(){
+    return _numero_artistas;
 }
 
 void Movimento::ver_artistas(){
-    for(int i = 0; i<_nArtista; i++){
+    for(int i = 0; i<_numero_artistas; i++){
 
         std::cout << _artistas[i]->get_nome_artista() << std::endl;
 
@@ -31,20 +50,24 @@ int Movimento::calcular_popularidade(){
     
     int media;
 
-    for(int i = 0; i < _nArtista; i++){
+    for(int i = 0; i < _numero_artistas; i++){
 
         media += _artistas[i]->get_popularidade();
 
     }
 
-    return media/_nArtista;
+    return media/_numero_artistas;
 
 }
 
 void Movimento::ver_obras(){
 
-    for(int i = 0; i<_nArtista; i++){
+    for(int i = 0; i<_numero_artistas; i++){
 
         _artistas[i]->ver_obras();
     }
+}
+
+bool get_carregado(){
+    return _carregado;
 }
