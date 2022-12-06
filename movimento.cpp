@@ -2,8 +2,10 @@
 #include "Movimento.h"
 #include "Artista.h"
 
-Movimento::Movimento(int id, std::string nome, int numero_artistas){
-    _id = id;
+int Movimento::_id_geral=300;
+
+Movimento::Movimento(std::string nome, int numero_artistas){
+    _id=_id_geral++;
     _nome = nome;
     _numero_artistas = numero_artistas;
     _carregado=false;
@@ -41,7 +43,7 @@ int Movimento::get_numero_artistas(){
 void Movimento::ver_artistas(){
     for(int i = 0; i<_numero_artistas; i++){
 
-        std::cout << _artistas[i]->get_nome_artista() << std::endl;
+        std::cout << _artistas[i]->get_nome() << std::endl;
 
     }
 }

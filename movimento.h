@@ -6,13 +6,14 @@
 class Movimento
 {
     private:
+        static int _id_geral;
         int _id;
         std::string _nome;
         int _numero_artistas;
         Artista** _artistas;
         bool _carregado;
     public:
-        Movimento(int id, std::string nome, int numero_artistas);
+        Movimento(std::string nome, int numero_artistas);
         void carregar_sistema();  //para preencher o acervo de artistas e obras
         void descarregar_sistema();
         ~Movimento();
