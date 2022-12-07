@@ -1,17 +1,18 @@
 #pragma once
-#include <bits/stdc++.h>
+#include <iostream>
 
 class Pessoa
 {
 private:
-    int Id_Pessoa;
-    float salario;
+    static int _id_geral;
+    int _id;
+    float _salario;
 
 public:
-    Pessoa();
+    Pessoa(int id, float salario);
     ~Pessoa();
 
-    void get_salario_pessoa();
-    void get_Id_pessoa();
+    float get_salario_pessoa();
+    int get_id();
     virtual float calcular_salario() = 0;
 };

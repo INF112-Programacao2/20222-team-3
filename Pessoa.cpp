@@ -1,22 +1,22 @@
-#include <bits/stdc++.h>
+#include <iostream>
 #include "Pessoa.h"
-// Construtor
-Pessoa::Pessoa()
-{
 
-    int _id;
-    std::cin >> _id;
-    Id_Pessoa = _id;
-    salario = calcular_salario();
+int Pessoa::_id_geral=400;
+// Construtor
+Pessoa::Pessoa(int id,float salario)
+{
+    _id = _id_geral++;
+    _salario = salario ;
 }
 // Destrutor
 Pessoa::~Pessoa(){};
 // Métodos
-void Pessoa::get_salario_pessoa()
+float Pessoa::get_salario_pessoa()
 {
-    std::cout << salario << std::endl;
+    return _salario;
 };
-void Pessoa::get_Id_pessoa()
+int Pessoa::get_id()
 {
-    std::cout << Id_Pessoa << std::endl;
+    return _id
+
 };
