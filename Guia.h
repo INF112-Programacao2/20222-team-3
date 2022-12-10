@@ -8,17 +8,17 @@ class Guia : public Funcionario
 {
 private:
     // Dados privados
-    std::string funcao;
-    std::string especialidade;
+    bool _acessibilidade;
+    int _especialidade;
 
 public:
     // Construtor
-    Guia();
+    Guia(bool acessibilidade, int especialidade, std::string carga_horaria, int id, float salario);
     // Destrutor
     ~Guia();
     // Métodos
 
-    void get_funcao();
-    void get_especialidade();
+    bool get_acessibilidade();
+    int get_especialidade();
     float calcular_salario();
 };

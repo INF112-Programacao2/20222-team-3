@@ -6,13 +6,13 @@ class Funcionario : public Pessoa
 {
 
 private:
-    bool *carga_horaria;
+    std::string _carga_horaria;
 
 public:
-    Funcionario();
+    Funcionario(std::string carga_horario, int id, float salario);
     ~Funcionario();
 
-    void get_carga_horaria();
+    std::string get_carga_horaria();
 
     virtual float calcular_salario() = 0;
 };

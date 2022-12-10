@@ -2,29 +2,27 @@
 #include <string>
 #include "Guia.h"
 
-Guia::Guia()
+Guia::Guia(bool acessibilidade, int especialidade,std::string carga_horaria,int id,float salario): Funcionario(carga_horaria,id,salario)
 {
-    std::string a, b;
-    std::cin >> a >> b;
-    funcao = a;
-    especialidade = b;
+    _acessibilidade = acessibilidade;
+    _especialidade = especialidade;
 };
 
 Guia::~Guia(){};
 
-void Guia::get_especialidade()
+int Guia::get_especialidade()
 {
 
-    std::cout << especialidade << std::endl;
+   return _especialidade;
 };
-void Guia::get_funcao()
+bool Guia::get_acessibilidade()
 {
-    std::cout << funcao << std::endl;
+    return _acessibilidade;
 };
 
 float Guia::calcular_salario()
 {
-    float a;
-    std::cin >> a;
-    return a;
+    
+
+    
 };

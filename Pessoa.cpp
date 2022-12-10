@@ -17,6 +17,6 @@ float Pessoa::get_salario_pessoa()
 };
 int Pessoa::get_id()
 {
-    return _id
+    return _id;
 
 };

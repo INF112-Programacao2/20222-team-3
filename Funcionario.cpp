@@ -1,25 +1,17 @@
 #include "Funcionario.h"
 
-Funcionario::Funcionario()
+Funcionario::Funcionario(std::string carga_horaria, int id, float salario) : Pessoa(id, salario)
 {
 
-   carga_horaria = new bool[7];
-   for (int i = 0; i < 7; ++i)
-   {
-      std::cin >> carga_horaria[i];
-   }
+   _carga_horaria = carga_horaria;
 }
 
-Funcionario::~Funcionario()
-{
-   delete[] carga_horaria;
+Funcionario::~Funcionario(){
+
 };
 
-void Funcionario::get_carga_horaria()
+std::string Funcionario::get_carga_horaria()
 {
-   for (int i = 0; i < 7; ++i)
-   {
-      std::cout << carga_horaria[i] << " ";
-   }
-   std::cout << std::endl;
+
+   return _carga_horaria;
 }
