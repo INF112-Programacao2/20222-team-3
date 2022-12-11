@@ -9,8 +9,8 @@ private:
     std::string _carga_horaria;
 
 public:
-    Funcionario(std::string carga_horario, int id, float salario);
-    ~Funcionario();
+    Funcionario(std::string carga_horario, float salario);
+    virtual ~Funcionario();
 
     std::string get_carga_horaria();
 

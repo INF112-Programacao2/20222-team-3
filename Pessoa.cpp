@@ -3,7 +3,7 @@
 
 int Pessoa::_id_geral=400;
 // Construtor
-Pessoa::Pessoa(int id,float salario)
+Pessoa::Pessoa(float salario)
 {
     _id = _id_geral++;
     _salario = salario ;

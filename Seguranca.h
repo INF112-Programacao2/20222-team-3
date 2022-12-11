@@ -2,17 +2,17 @@
 #include <bits/stdc++.h>
 #include "Funcionario.h"
 
-class Seguranca : public  Funcionario
+class Seguranca : public Funcionario
 {
 private:
-    bool horario_noturno;
+    bool _horario_noturno;
 
 public:
     // Construtor
-    Seguranca();
+    Seguranca(bool horario_noturno,std::string carga_horaria,float salario);
     // Destrutor
-    ~Seguranca();
+    virtual ~Seguranca();
     // Métodos
-    virtual float calcular_salario() override;
+    virtual float calcular_salario();
     bool get_horario_noturno();
 };

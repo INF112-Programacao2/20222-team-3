@@ -1,11 +1,10 @@
 #include <iostream>
 #include "Seguranca.h"
 
-Seguranca::Seguranca()
+Seguranca::Seguranca(bool horario_noturno,std::string carga_horaria,float salario):Funcionario(carga_horaria,salario)
 {
-    int a;
-    std::cin >> a;
-    horario_noturno = a;
+    
+    _horario_noturno = horario_noturno;
 };
 
 Seguranca::~Seguranca()
@@ -15,13 +14,11 @@ Seguranca::~Seguranca()
 bool Seguranca::get_horario_noturno()
 {
 
-    return horario_noturno;
+    return _horario_noturno;
 }
 
 float Seguranca::calcular_salario()
 {
 
-    float a;
-    std::cin >> a;
-    return a;
+   
 }

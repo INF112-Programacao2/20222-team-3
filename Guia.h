@@ -13,9 +13,9 @@ private:
 
 public:
     // Construtor
-    Guia(bool acessibilidade, int especialidade, std::string carga_horaria, int id, float salario);
+    Guia(bool acessibilidade, int especialidade, std::string carga_horaria, float salario);
     // Destrutor
-    ~Guia();
+    virtual ~Guia();
     // Métodos
 
     bool get_acessibilidade();

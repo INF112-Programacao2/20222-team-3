@@ -2,7 +2,7 @@
 #include <string>
 #include "Guia.h"
 
-Guia::Guia(bool acessibilidade, int especialidade,std::string carga_horaria,int id,float salario): Funcionario(carga_horaria,id,salario)
+Guia::Guia(bool acessibilidade, int especialidade, std::string carga_horaria, float salario) : Funcionario(carga_horaria, salario)
 {
     _acessibilidade = acessibilidade;
     _especialidade = especialidade;
@@ -13,7 +13,7 @@ Guia::~Guia(){};
 int Guia::get_especialidade()
 {
 
-   return _especialidade;
+    return _especialidade;
 };
 bool Guia::get_acessibilidade()
 {
@@ -22,7 +22,8 @@ bool Guia::get_acessibilidade()
 
 float Guia::calcular_salario()
 {
-    
+    int cont = 0;
+
 
     
 };
