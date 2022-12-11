@@ -10,10 +10,10 @@ private:
 
 public:
     // Construtor
-    Seguranca(bool horario_noturno,std::string carga_horaria,float salario);
+    Seguranca(bool horario_noturno,std::string carga_horaria,int salario);
     // Destrutor
     virtual ~Seguranca();
     // Métodos
-    virtual float calcular_salario();
+    virtual int calcular_salario();
     bool get_horario_noturno();
 };

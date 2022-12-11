@@ -11,12 +11,12 @@ private:
 
 public:
     // Construtor
-    Funcionario(std::string carga_horario, float salario);
+    Funcionario(std::string carga_horario, int salario);
     // Destrutor
     virtual ~Funcionario();
 
     // Métodos
     std::string get_carga_horaria();
     // Interface
-    virtual float calcular_salario() = 0;
+    virtual int calcular_salario() = 0;
 };

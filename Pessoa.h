@@ -7,17 +7,17 @@ private:
     // Dados Privados
     static int _id_geral;
     int _id;
-    float _salario;
+    int _salario;
 
 public:
     // Construtor
-    Pessoa(float salario);
+    Pessoa(int salario);
     // Destrutor
     virtual ~Pessoa();
 
     // Métodos Públicos
-    float get_salario();
+    int get_salario();
     int get_id();
     // Interface
-    virtual float calcular_salario() = 0;
+    virtual int calcular_salario() = 0;
 };

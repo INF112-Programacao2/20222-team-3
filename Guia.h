@@ -13,12 +13,12 @@ private:
 
 public:
     // Construtor
-    Guia(bool acessibilidade, int especialidade, std::string carga_horaria, float salario);
+    Guia(bool acessibilidade, int especialidade, std::string carga_horaria, int salario);
     // Destrutor
     virtual ~Guia();
     // Métodos
 
     bool get_acessibilidade();
     int get_especialidade();
-    float calcular_salario();
+    int calcular_salario();
 };
