@@ -12,7 +12,6 @@ private:
     std::string _nome; // nome do artista
     Obra **_obras;     // vetor de obras
     int _popularidade; // popularidade do artista
-    bool _carregado;   // booleano para verificar se o sistema esta carregado ou nao
 
 public:
     Artista(int numero_obras, std::string nome, int popularidade); // metodo construtor
@@ -23,6 +22,5 @@ public:
     int get_numero_obras();                                        // retorna o numero de obras do artista
     int get_id();                                                  // retorna o id do artista
     std::string get_nome();                                        // rerorna o nome do artista
-    bool get_carregado();                                          // retorna a verificacao se o sistema esta carregado
     void ver_obras();                                              // exibe as obras, por meio de um array com numero de obras e os nomes
 };

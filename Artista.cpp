@@ -9,7 +9,6 @@ Artista::Artista(int numero_obras, std::string nome, int popularidade)
     _numero_obras = numero_obras;
     _nome = nome;
     _popularidade = popularidade;
-    _carregado = false;
 };
 
 void Artista::carregar_sistema()
@@ -18,28 +17,25 @@ void Artista::carregar_sistema()
     std::string nome;
     for (int i = 0; i < _numero_obras; i++)
     {
-        std::cin >> nome;
+        std::getline(std::cin, nome);
         _obras[i] = new Obra(nome);
     }
-    _carregado = true;
 }
 
 void Artista::descarregar_sistema()
 { // descarregando sistema com metodo destrutor para obras integrado com artista
-    if (!_carregado)
-        return;
+
     for (int i = 0; i < _numero_obras; i++)
     {
         delete _obras[i];
     }
     delete _obras;
-    _carregado = false;
 }
 
 Artista::~Artista()
 { // metodo destrutor
-    if (_carregado)
-        descarregar_sistema();
+
+    descarregar_sistema();
 };
 
 void Artista::ver_obras()
@@ -68,9 +64,4 @@ int Artista::get_id()
 std::string Artista::get_nome()
 { // retorno nome do artista
     return _nome;
-};
-
-bool Artista::get_carregado()
-{ // retorna em booleano se o sistema esta carregado ou nao
-    return _carregado;
 };
