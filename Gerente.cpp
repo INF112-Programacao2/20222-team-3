@@ -10,14 +10,14 @@ void Gerente::carregar_sistema(){
         int semana=i+1;
         std::string acessibilidade;
         std::string visitantes;
-        std::getline(std::cin, nome);
-        std::cin>>numero_artistas;
+        std::getline(std::fin, nome);
+        std::fin>>numero_artistas;
         if(ler_int(numero_artistas)==0)
             throw std::exception("Numero de artistas de "+nome+" invalido.");
-        std::cin >> acessibilidade;
+        std::fin >> acessibilidade;
         if(ler_bool(acessibilidade)==2)
             throw std::exception("Acessibilidade de "+nome+" deve ser 0(falso) ou 1(verdadeiro).");
-        std::cin>>visitantes;
+        std::fin>>visitantes;
         if(ler_int(visitantes)==0)
             throw std::exception("Numero de visitantes de "+nome+" invalido.");
         
@@ -26,46 +26,46 @@ void Gerente::carregar_sistema(){
     }
 
     _segurancas=new Seguranca*[_numero_segurancas];
+    std::fin>>salario;
+    if(ler_int(salario)==0)
+        throw std::exception("Salario de "+to_string(_segurancas[i]->get_id())+" invalido.");
     for(int i=0; i<_numero_segurancas;i++)
     {
         std::string horario_noturno;
-        std::cin>>salario;
-        if(ler_int(salario)==0)
-            throw std::exception("Salario de "+to_string(_segurancas[i]->get_id())+" invalido.");
-        std::cin>>carga_horaria;
+        std::fin>>carga_horaria;
         if(carga_horaria.size()!=7)
             throw std::exception("Carga horaria de "+to_string(_segurancas[i]->get_id())+" deve ter 7 numeros(0s ou 1s).");
         for(int x=0;x<7;x++)
             if(ler_bool(carga_horaria[x])==2)
                 throw std::exception("Carga horaria de "+to_string(_segurancas[i]->get_id())+" deve conter somente 0s ou 1s.");
-        std::cin>>horario_noturno;
+        std::fin>>horario_noturno;
         if(ler_bool(horario_noturno)==2)
             throw std::exception("Horario noturno de "+to_string(_segurancas[i]->get_id())+" deve ser 0(falso) ou 1(verdadeiro).");
         _segurancas[i]= new Seguranca(ler_int(salario),carga_horaria,ler_bool(horario_noturno));
     }
 
     _guias=new Guia*[_numero_guias];
+    std::fin >> salario;
+    if(ler_int(salario)==0)
+        throw std::exception("Salario de "+to_string(_guias[i]->get_id())+" invalido.");
     for(int i = 0; i < _numero_guias; i++)
     {
         std::string acessibilidade;
         std::string especialidade;
-        std::cin >> salario;
-        if(ler_int(salario)==0)
-            throw std::exception("Salario de "+to_string(_guias[i]->get_id())+" invalido.");
-        std::cin >> carga_horaria;
+        std::fin >> carga_horaria;
         if(carga_horaria.size()!=7)
             throw std::exception("Carga horaria de "+to_string(_guias[i]->get_id())+" deve ter 7 numeros(0s ou 1s).");
         for(int x=0;x<7;x++)
             if(ler_bool(carga_horaria[x])==2)
                 throw std::exception("Carga horaria de "+to_string(_guias[i]->get_id())+" deve conter somente 0s ou 1s.");
-        std::cin >> acessibilidade;
+        std::fin >> acessibilidade;
         if(ler_bool(acessibilidade)==2)
             throw std::exception("Acessibilidade de "+to_string(_guias[i]->get_id())+" deve ser 0(falso) ou 1(verdadeiro).");
-        std::cin>>especialidade;
+        std::fin>>especialidade;
         // especialidade recebe inteiros entre 1 e 5
         if(ler_digito(especialidade)==0)
             throw std::exception("Especialidade só permite inteiros entre 1 e 5.");
-        _guias[i]= new Guia(ler_int(salario),carga_horaria,ler_bool(acessibilidade),ler_digito(especialidade));
+        _guias[i]= new Guia(ler_int(salario)*(ler_digito(especialidade)+1)/2,carga_horaria,ler_bool(acessibilidade),ler_digito(especialidade));
     }
 }
 

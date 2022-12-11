@@ -16,13 +16,13 @@ void Movimento::carregar_sistema(){
             std::string nome;
             std::string popularidade; //inserindo a popularidade do artista
             std::string numero_obras; //inseridondo o numero de obras, que será usado para alocar as obras nos artistas 
-            std::cin.ignore();
-            std::getline(std::cin,nome);
-            std::cin>>popularidade;
+            std::fin.ignore();
+            std::getline(std::fin,nome);
+            std::fin>>popularidade;
             // popularidade recebe inteiros entre 1 e 5
             if(ler_digito(popularidade)==0)
                 throw std::exception("Popularidade de "+nome+" deve ser um inteiro entre 1 e 5.");
-            std::cin>>numero_obras;
+            std::fin>>numero_obras;
             if(ler_int(numero_obras)==0)
                 throw std::exception("Numero de obras de "+nome+" invalido.");
             _artistas[i]=new Artista(nome,ler_digito(popularidade),ler_int(numero_obras)); // cada posicao do vetor estará sendo alocado um artista

@@ -17,7 +17,7 @@ void Artista::carregar_sistema()
     std::string nome;
     for (int i = 0; i < _numero_obras; i++)
     {
-        std::getline(std::cin, nome);
+        std::getline(std::fin, nome);
         _obras[i] = new Obra(nome);
     }
 }
