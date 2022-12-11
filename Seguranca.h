@@ -1,5 +1,5 @@
 #pragma once
-#include <bits/stdc++.h>
+#include <string>
 #include "Funcionario.h"
 
 class Seguranca : public Funcionario

@@ -11,7 +11,7 @@ Pessoa::Pessoa(float salario)
 // Destrutor
 Pessoa::~Pessoa(){};
 // Métodos
-float Pessoa::get_salario_pessoa()
+float Pessoa::get_salario()
 {
     return _salario;
 };

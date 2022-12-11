@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include "Guia.h"
+#include <algorithm>
 
 Guia::Guia(bool acessibilidade, int especialidade, std::string carga_horaria, float salario) : Funcionario(carga_horaria, salario)
 {
@@ -22,8 +23,8 @@ bool Guia::get_acessibilidade()
 
 float Guia::calcular_salario()
 {
-    int cont = 0;
 
+    int i = count(get_carga_horaria().begin(), get_carga_horaria().end(), '1');
 
-    
+    return get_salario() * i;
 };
