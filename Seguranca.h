@@ -5,6 +5,7 @@
 class Seguranca : public Funcionario
 {
 private:
+//métodos privados
     bool _horario_noturno;
 
 public:
