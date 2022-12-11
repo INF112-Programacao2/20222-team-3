@@ -13,7 +13,7 @@ private:
 
 public:
     // Construtor
-    Guia(bool acessibilidade, int especialidade, std::string carga_horaria, int salario);
+    Guia(int salario,std::string carga_horaria,bool acessibilidade,int especialidade);
     // Destrutor
     virtual ~Guia();
     // Métodos

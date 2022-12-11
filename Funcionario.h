@@ -11,7 +11,7 @@ private:
 
 public:
     // Construtor
-    Funcionario(std::string carga_horario, int salario);
+    Funcionario(int salario,std::string carga_horaria);
     // Destrutor
     virtual ~Funcionario();
 

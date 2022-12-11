@@ -4,14 +4,8 @@
 #include <algorithm>
 #include <exception>
 
-Seguranca::Seguranca(bool horario_noturno, std::string carga_horaria, int salario) : Funcionario(carga_horaria, salario) // Construtor de Funcionário
-{
-
-    _horario_noturno = horario_noturno;
-    //Tratando exceção caso seja inserido um valor diferente de um valor lógico válido.
-    if(_horario_noturno != 0 || _horario_noturno != 1)
-    throw std::invalid_argument("Horario Noturno só recebe true(1) ou false(0)!\n");
-};
+Seguranca::Seguranca(int salario,std::string carga_horaria,bool horario_noturno):
+    Funcionario(salario,carga_horaria), _horario_noturno(horario_noturno){}
 
 Seguranca::~Seguranca()
 {

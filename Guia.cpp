@@ -4,22 +4,8 @@
 #include <algorithm>
 #include <ctype.h>
 
-Guia::Guia(bool acessibilidade, int especialidade, std::string carga_horaria, int salario) : Funcionario(carga_horaria, salario) // Construtor de Funcionario
-{
-
-    _acessibilidade = acessibilidade;
-    _especialidade = especialidade;
-    // Acessibilidade só pode receber valores lógicos(true e false), tratando exceção;
-    if (_acessibilidade != 0 || _acessibilidade != 1)
-        throw std::invalid_argument("Acessibilidade só recebe true(1) ou false(0)!\n");
-    // Especialidade só recebe inteiro, tratando exceção
-    if (!isdigit(_especialidade))
-        throw std::invalid_argument("Especialidade só recebe inteiros");
-    // Especialidade só recebe inteiros entre 1 e 5 , tratando exceções;
-
-    if (_especialidade < 1 || _especialidade > 5)
-        throw std::invalid_argument("Especialidade só pertimite inteiros entre 1 e 5");
-};
+Guia::Guia(int salario,std::string carga_horaria,bool acessibilidade,int especialidade):
+    Funcionario(salario,carga_horaria), _acessibilidade(acessibilidade), _especialidade(especialidade){}
 
 Guia::~Guia(){};
 

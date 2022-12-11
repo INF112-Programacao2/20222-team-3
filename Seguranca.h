@@ -10,7 +10,7 @@ private:
 
 public:
     // Construtor
-    Seguranca(bool horario_noturno,std::string carga_horaria,int salario);
+    Seguranca(int salario,std::string carga_horaria,bool horario_noturno);
     // Destrutor
     virtual ~Seguranca();
     // Métodos
