@@ -6,7 +6,7 @@ Modernismo Brasileiro
 3
 5
 1
-50
+500
 Tarsila do Amaral
 4
 Bandeira do Divino
@@ -27,7 +27,7 @@ Cubismo Brasileiro
 3
 4
 1
-40
+420
 Candido Portinari
 3
 Espantalho
@@ -47,7 +47,7 @@ Abstracionismo Brasileiro
 3
 4
 1
-40
+380
 Antonio Bandeira
 4
 Cais Noturno
@@ -69,7 +69,7 @@ Fauvismo
 3
 3
 0
-25
+290
 Inima Jose de Paula
 3
 Paisagem

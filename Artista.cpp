@@ -35,7 +35,8 @@ void Artista::ver_obras()
 { // exibir obras do artista
     for (int i = 0; i < _numero_obras; i++)
     {
-        std::cout << _obras[i]->get_id() << " " << _obras[i]->get_nome() << std::endl;
+        if(!_obras[i]->get_arquivada()) //se a obra nao estiver arquivda
+            std::cout << _obras[i]->get_id() << " " << _obras[i]->get_nome() << std::endl; //exibir o id e o nome
     }
 };
 
