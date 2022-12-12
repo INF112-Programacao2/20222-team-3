@@ -103,9 +103,9 @@ Gerente::Gerente(int salario,int numero_exposicoes,int numero_segurancas,int num
         carregar_sistema(fin);
     }
 
-void Gerente::descarregar_sistema(){
+Gerente::~Gerente(){
     for(int i=0;i<_numero_exposicoes;i++)
-        _exposicoes[i]->descarregar_sistema();
+        delete _exposicoes[i];
     for(int j = 0; j < _numero_segurancas; j++)
     {
         delete _segurancas[j];
@@ -116,11 +116,7 @@ void Gerente::descarregar_sistema(){
     }
     delete _segurancas;
     delete _guias;
-    delete _exposicoes;       
-}
-
-Gerente::~Gerente(){
-    descarregar_sistema();
+    delete _exposicoes;      
 }
 
 Exposicao** Gerente::get_exposicoes(){
@@ -148,7 +144,8 @@ void Gerente::ver_exposicoes(){
         for(int j=0;j<_exposicoes[i]->get_numero_artistas();j++){
             std::cout<<"Artista: "<<_exposicoes[i]->get_artistas()[j]->get_nome()<<std::endl;
             for(int k=0;k<_exposicoes[i]->get_artistas()[j]->get_numero_obras();k++)
-                std::cout<<_exposicoes[i]->get_artistas()[j]->get_obras()[k]->get_nome() << std::endl; 
+                if(!(_exposicoes[i]->get_artistas()[j]->get_obras()[k]->get_arquivada())) //se nao esta arquivada
+                    std::cout<<_exposicoes[i]->get_artistas()[j]->get_obras()[k]->get_nome() << std::endl; 
         } 
     }
 }
@@ -216,7 +213,7 @@ void Gerente::atribuir_funcionarios(){
             for(int j=0;j<_numero_segurancas;j++){
                 if(_segurancas[j]->get_carga_horaria()[i]=='1' && _segurancas[j]->get_horario_noturno()==true){ 
                     seguranca=_segurancas[j]; 
-                    _exposicoes[l]->get_vigilancia_noturna()[i][vigilancia_necessaria]=seguranca->get_id();  
+                    _exposicoes[l]->get_vigilancia_noturna()[i][vigilancia_necessaria-1]=seguranca->get_id();  
                     vigilancia_necessaria--; 
                     if(vigilancia_necessaria<1) 
                         break;
@@ -228,6 +225,10 @@ void Gerente::atribuir_funcionarios(){
                 }
             }
         }
+        std::cout<<std::endl<<_exposicoes[l]->get_nome()<<std::endl<<std::endl;
+        _exposicoes[l]->ver_vigilancia();
+        std::cout<<"NOTURNO\n";
+        _exposicoes[l]->ver_vigilancia_noturna();
     }
 }
 

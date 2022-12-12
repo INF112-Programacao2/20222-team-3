@@ -15,7 +15,6 @@ public:
     Exposicao(std::string nome,int numero_artistas,int popularidade,int semana,bool acessibilidade,int visitantes);
     ~Exposicao();
     
-    void desaloca_vigilancia();
     void ver_vigilancia();
     void ver_vigilancia_noturna();
     int** get_vigilancia();  

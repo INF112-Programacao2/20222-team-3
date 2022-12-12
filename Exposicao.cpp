@@ -10,18 +10,14 @@ Exposicao::Exposicao(std::string nome,int numero_artistas,int popularidade,int s
             _vigilancia_noturna[i]=new int[popularidade/2];
         }
     }
-    
-void Exposicao::desaloca_vigilancia(){
+
+Exposicao::~Exposicao(){
     for(int i=0;i<7;i++){
         delete _vigilancia[i];
         delete _vigilancia_noturna[i];
     }
     delete _vigilancia;
     delete _vigilancia_noturna;
-}
-
-Exposicao::~Exposicao(){
-    desaloca_vigilancia();
 }
 
 int** Exposicao::get_vigilancia(){

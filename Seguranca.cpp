@@ -1,7 +1,5 @@
-#include <iostream>
 #include "Seguranca.h"
 #include <iostream>
-#include <algorithm>
 #include <exception>
 
 Seguranca::Seguranca(int salario,std::string carga_horaria,bool horario_noturno):
@@ -20,10 +18,13 @@ bool Seguranca::get_horario_noturno()
 int Seguranca::calcular_salario()
 {
     // Quantidade de dias trabalhados (respresentado por '1')
-    int i = count(get_carga_horaria().begin(), get_carga_horaria().end(), '1');
+    int cont=0;
+    for(int i=0;i<get_carga_horaria().size();i++)
+        if(get_carga_horaria()[i]=='1')
+            cont++;
     if (_horario_noturno)
         // se o segurança trabalha a noite, ele ganha o dobro
-        return get_salario() * 2 * i * 4;
+        return get_salario() * 2 * cont * 4;
     else
-        return get_salario() * i * 4;
+        return get_salario() * cont * 4;
 }

@@ -17,7 +17,6 @@ private:
 public:
     Artista(std::string nome,int numero_obras); // metodo construtor
     void carregar_sistema(std::ifstream &fin);                                       // metodo para carregar o sistema com as obras do artista
-    void descarregar_sistema();                                    // metodo destrutor para descarregar o sistema
     ~Artista();                                                    // metodo destrutor
     int get_numero_obras();                                        // retorna o numero de obras do artista
     int get_id();                                                  // retorna o id do artista

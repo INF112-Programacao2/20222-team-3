@@ -18,7 +18,6 @@ private:
 public:
     Gerente(int salario,int numero_exposicoes,int numero_segurancas,int numero_guias, std::ifstream &fin);
     void carregar_sistema(std::ifstream &fin);  //para preencher o acervo de movimentos, artistas e obras
-    void descarregar_sistema();
     ~Gerente();
     Exposicao** get_exposicoes();
     Seguranca** get_segurancas();

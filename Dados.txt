@@ -43,7 +43,7 @@ Vicente Monteiro
 Maternidade Indigena
 Pastor
 Pieta
-Abstracionismo Brasilerio
+Abstracionismo Brasileiro
 3
 4
 1
@@ -82,35 +82,35 @@ Arthur Timotheo da Costa
 1
 Menino com Legumes
 70
-1010111
+1111111
 1
-0111110
+1111111
 1
-1011110
+1111111
 1
-1000001
+1111111
 1
-1010101
-0
-0111111
-0
-1110101
+1111111
 1
-1100011
-0
+1111111
+1
+1111111
+1
+1111111
+1
 75
-1010111
+1111111
 1
 4
-0111110
+1111111
 1
 5
-1011110
+1111111
 1
 2
-1000001
+1111111
 1
 3
-1010101
-0
+1111111
+1
 1

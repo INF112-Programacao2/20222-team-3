@@ -22,20 +22,13 @@ void Artista::carregar_sistema(std::ifstream &fin)
     
 }
 
-void Artista::descarregar_sistema()
-{ // descarregando sistema com metodo destrutor para obras integrado com artista
-
+Artista::~Artista()
+{ // metodo destrutor
     for (int i = 0; i < _numero_obras; i++)
     {
         delete _obras[i];
     }
     delete _obras;
-}
-
-Artista::~Artista()
-{ // metodo destrutor
-
-    descarregar_sistema();
 };
 
 void Artista::ver_obras()

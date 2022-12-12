@@ -16,7 +16,7 @@ void menu_inicial()
     std::cout << "(2) Ver segurancas" << std::endl;
     std::cout << "(3) Ver guias" << std::endl;
     std::cout << "(4) Arquivar obra" << std::endl;
-    std::cout << "(5) Atribuir funcionario" << std::endl;
+    std::cout << "(5) Atribuir funcionarios" << std::endl;
     std::cout << "(6) Calcular lucro" << std::endl;
     std::cout << "(7) Sair" << std::endl;
 }
@@ -66,7 +66,7 @@ void funcoes_menu(Gerente &gerente)
             }
         }
         if(escolha=="6"){
-            gerente.calcular_lucro();
+            std::cout<<"RS "<<gerente.calcular_lucro()<<std::endl;
         }
         if(escolha=="7"){
             break;

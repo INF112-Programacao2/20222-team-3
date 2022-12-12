@@ -30,14 +30,10 @@ void Movimento::carregar_sistema(std::ifstream &fin){
         }
 }
 
-void Movimento::descarregar_sistema(){
-    for(int i=0;i<_numero_artistas;i++)
-        _artistas[i]->descarregar_sistema();//descarregando as obras de artista
-    delete _artistas;//descarregando os artistas do vetor
-}
-
 Movimento::~Movimento(){
-    descarregar_sistema(); //utilizando o metodo pra remover da memoria o que foi alocado dinamicamente
+    for(int i=0;i<_numero_artistas;i++)
+        delete _artistas[i];
+    delete _artistas;//descarregando os artistas do vetor
 }
 
 int Movimento::get_numero_artistas(){

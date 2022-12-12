@@ -1,6 +1,7 @@
 #pragma once
 #include "Pessoa.h"
 #include <iostream>
+#include<string>
 
 class Funcionario : public Pessoa
 {

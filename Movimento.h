@@ -17,7 +17,6 @@ class Movimento
     public:
         Movimento(std::string nome, int numero_artistas, int popularidade); //₢osntrutor que recebe nome, e numero de artistas 
         void carregar_sistema(std::ifstream &fin);  //para preencher o acervo de artistas e obras
-        void descarregar_sistema(); // descarregar o acervo de artistas e obras
         virtual ~Movimento(); // destrutor da classe
         int get_numero_artistas(); //retorna o numero de artistas
         Artista** get_artistas();
