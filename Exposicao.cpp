@@ -1,18 +1,14 @@
 #include "Exposicao.h"
 
-void Exposicao::aloca_vigilancia(){
-    _vigilancia=new int*[7];
-    _vigilancia_noturna=new int*[7];
-    for(int i=0;i<7;i++){
-        _vigilancia[i]=new int[calcular_popularidade()+1];  //+1 pois a primeira posicao pertence ao guia
-        _vigilancia_noturna[i]=new int[calcular_popularidade()/2];
-    }
-}
-
-Exposicao::Exposicao(std::string nome,int numero_artistas,int semana,bool acessibilidade,int visitantes):
-    Movimento(nome,numero_artistas),_semana(semana),_acessibilidade(acessibilidade),_visitantes(visitantes)
+Exposicao::Exposicao(std::string nome,int numero_artistas,int popularidade,int semana,bool acessibilidade,int visitantes):
+    Movimento(nome,numero_artistas,popularidade),_semana(semana),_acessibilidade(acessibilidade),_visitantes(visitantes)
     {
-        aloca_vigilancia();
+        _vigilancia=new int*[7];
+        _vigilancia_noturna=new int*[7];
+        for(int i=0;i<7;i++){
+            _vigilancia[i]=new int[popularidade+1];  //+1 pois a primeira posicao pertence ao guia
+            _vigilancia_noturna[i]=new int[popularidade/2];
+        }
     }
     
 void Exposicao::desaloca_vigilancia(){
@@ -47,7 +43,7 @@ void Exposicao::ver_vigilancia(){
     std::string dias[7]={"Domingo","Segunda","Terca","Quarta","Quinta","Sexta","Sabado"};
     for(int i=0;i<7;i++){
         std::cout<<dias[i]<<":"<<std::endl;
-        for(int j=0;j<calcular_popularidade()+1;j++)
+        for(int j=0;j<get_popularidade()+1;j++)
             std::cout<<_vigilancia[i][j]<<" ";
         std::cout<<std::endl;
     }
@@ -56,11 +52,11 @@ void Exposicao::ver_vigilancia_noturna(){
     std::string dias[7]={"Domingo","Segunda","Terca","Quarta","Quinta","Sexta","Sabado"};
     for(int i=0;i<7;i++){
         std::cout<<dias[i]<<":"<<std::endl;
-        for(int j=0;j<calcular_popularidade()/2;j++)
+        for(int j=0;j<get_popularidade()/2;j++)
             std::cout<<_vigilancia_noturna[i][j]<<" ";
         std::cout<<std::endl;
     }
 }
 int Exposicao::calcular_preco(){
-    return 12*calcular_popularidade();
+    return 12*get_popularidade();
 }

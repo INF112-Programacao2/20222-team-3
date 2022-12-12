@@ -1,6 +1,8 @@
 #pragma once
 
 #include <iostream>
+#include <fstream>
+#include<exception>
 #include "Obra.h"
 
 class Artista
@@ -11,16 +13,15 @@ private:
     int _numero_obras; // numero de obras do artista
     std::string _nome; // nome do artista
     Obra **_obras;     // vetor de obras
-    int _popularidade; // popularidade do artista
 
 public:
-    Artista(int numero_obras, std::string nome, int popularidade); // metodo construtor
-    void carregar_sistema();                                       // metodo para carregar o sistema com as obras do artista
+    Artista(std::string nome,int numero_obras); // metodo construtor
+    void carregar_sistema(std::ifstream &fin);                                       // metodo para carregar o sistema com as obras do artista
     void descarregar_sistema();                                    // metodo destrutor para descarregar o sistema
     ~Artista();                                                    // metodo destrutor
-    int get_popularidade();                                        // retorna a popularidade do artista
     int get_numero_obras();                                        // retorna o numero de obras do artista
     int get_id();                                                  // retorna o id do artista
+    Obra** get_obras();
     std::string get_nome();                                        // rerorna o nome do artista
     void ver_obras();                                              // exibe as obras, por meio de um array com numero de obras e os nomes
 };
