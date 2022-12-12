@@ -1,5 +1,7 @@
 #pragma once
-#include <cstring>
+#include <string>
+#include <fstream>
+#include<exception>
 #include "Seguranca.h" //nao precisa incluir Pessoa.h nem Funcionario.h pois Seguranca.h e Guia.h ja incluem
 #include "Guia.h"
 #include "Exposicao.h"
@@ -14,8 +16,8 @@ private:
     int _numero_segurancas;
     int _numero_guias;
 public:
-    Gerente(int salario,int numero_exposicoes,int numero_segurancas,int numero_guias);
-    void carregar_sistema();  //para preencher o acervo de movimentos, artistas e obras
+    Gerente(int salario,int numero_exposicoes,int numero_segurancas,int numero_guias, std::ifstream &fin);
+    void carregar_sistema(std::ifstream &fin);  //para preencher o acervo de movimentos, artistas e obras
     void descarregar_sistema();
     ~Gerente();
     Exposicao** get_exposicoes();

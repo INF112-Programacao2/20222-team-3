@@ -1,6 +1,8 @@
 #include "Gerente.h"
+#include "Funcoes.h"
 
-void Gerente::carregar_sistema(){
+void Gerente::carregar_sistema(std::ifstream &fin){
+    Funcoes f;
     std::string salario; 
     std::string carga_horaria; 
     _exposicoes=new Exposicao*[_numero_exposicoes];
@@ -8,71 +10,97 @@ void Gerente::carregar_sistema(){
         std::string nome;
         std::string numero_artistas;
         int semana=i+1;
+        std::string popularidade;
         std::string acessibilidade;
         std::string visitantes;
-        std::getline(std::fin, nome);
-        std::fin>>numero_artistas;
-        if(ler_int(numero_artistas)==0)
-            throw std::exception("Numero de artistas de "+nome+" invalido.");
-        std::fin >> acessibilidade;
-        if(ler_bool(acessibilidade)==2)
-            throw std::exception("Acessibilidade de "+nome+" deve ser 0(falso) ou 1(verdadeiro).");
-        std::fin>>visitantes;
-        if(ler_int(visitantes)==0)
-            throw std::exception("Numero de visitantes de "+nome+" invalido.");
-        
-        _exposicoes[i]=new Exposicao(nome,ler_int(numero_artistas),semana,ler_bool(acessibilidade),ler_int(visitantes));
-        _exposicoes[i]->carregar_sistema();
+        std::getline(fin, nome);
+        fin>>numero_artistas;
+        if(f.ler_int(numero_artistas)==0){
+            std::cout<<"Em "<<nome << std::endl;
+            throw std::invalid_argument("Numero de artistas invalido.");
+        }
+        fin>>popularidade;
+        if(f.ler_int(popularidade)==0){
+            std::cout<<"Em "<<nome << std::endl;
+            throw std::invalid_argument("Popularidade invalida.");
+        }
+        fin >> acessibilidade;
+        if(f.ler_bool(acessibilidade)==2){
+            std::cout<<"Em "<<nome<< std::endl;
+            throw std::invalid_argument("Acessibilidade  deve ser 0(falso) ou 1(verdadeiro).");
+        }
+        fin>>visitantes;
+        if(f.ler_int(visitantes)==0){
+            std::cout<<"Em "<<nome << std::endl;
+            throw std::invalid_argument("Numero de visitantes invalido.");
+        }
+        fin.ignore();
+        _exposicoes[i]=new Exposicao(nome,f.ler_int(numero_artistas),f.ler_int(popularidade),semana,f.ler_bool(acessibilidade),f.ler_int(visitantes));
+        _exposicoes[i]->carregar_sistema(fin);
     }
 
     _segurancas=new Seguranca*[_numero_segurancas];
-    std::fin>>salario;
-    if(ler_int(salario)==0)
-        throw std::exception("Salario de "+to_string(_segurancas[i]->get_id())+" invalido.");
+    fin>>salario;
+    if(f.ler_int(salario)==0)
+        throw std::invalid_argument("Salario invalido para segurancas.");
     for(int i=0; i<_numero_segurancas;i++)
     {
         std::string horario_noturno;
-        std::fin>>carga_horaria;
-        if(carga_horaria.size()!=7)
-            throw std::exception("Carga horaria de "+to_string(_segurancas[i]->get_id())+" deve ter 7 numeros(0s ou 1s).");
+        fin>>carga_horaria;
+        if(carga_horaria.size()!=7){
+            std::cout<<"Em "<<_segurancas[i]->get_id() << std::endl;
+            throw std::invalid_argument("Carga horaria deve ter 7 numeros(0s ou 1s).");
+        }
         for(int x=0;x<7;x++)
-            if(ler_bool(carga_horaria[x])==2)
-                throw std::exception("Carga horaria de "+to_string(_segurancas[i]->get_id())+" deve conter somente 0s ou 1s.");
-        std::fin>>horario_noturno;
-        if(ler_bool(horario_noturno)==2)
-            throw std::exception("Horario noturno de "+to_string(_segurancas[i]->get_id())+" deve ser 0(falso) ou 1(verdadeiro).");
-        _segurancas[i]= new Seguranca(ler_int(salario),carga_horaria,ler_bool(horario_noturno));
+            if(carga_horaria[x]!='1'&&carga_horaria[x]!='0'){
+                std::cout<<"Em "<<_segurancas[i]->get_id() << std::endl;
+                throw std::invalid_argument("Carga horaria deve conter somente 0s ou 1s.");
+            }
+        fin>>horario_noturno;
+        if(f.ler_bool(horario_noturno)==2){
+            std::cout<<"Em "<<_segurancas[i]->get_id() << std::endl;
+            throw std::invalid_argument("Horario noturno  deve ser 0(falso) ou 1(verdadeiro).");
+        }
+        _segurancas[i]= new Seguranca(f.ler_int(salario),carga_horaria,f.ler_bool(horario_noturno));
     }
 
     _guias=new Guia*[_numero_guias];
-    std::fin >> salario;
-    if(ler_int(salario)==0)
-        throw std::exception("Salario de "+to_string(_guias[i]->get_id())+" invalido.");
+    fin >> salario;
+    if(f.ler_int(salario)==0)
+        throw std::invalid_argument("Salario invalido para guias.");
     for(int i = 0; i < _numero_guias; i++)
     {
         std::string acessibilidade;
         std::string especialidade;
-        std::fin >> carga_horaria;
-        if(carga_horaria.size()!=7)
-            throw std::exception("Carga horaria de "+to_string(_guias[i]->get_id())+" deve ter 7 numeros(0s ou 1s).");
+        fin >> carga_horaria;
+        if(carga_horaria.size()!=7){
+            std::cout<<"Em "<<_guias[i]->get_id() << std::endl;
+            throw std::invalid_argument("Carga horaria deve ter 7 numeros(0s ou 1s).");
+        }
         for(int x=0;x<7;x++)
-            if(ler_bool(carga_horaria[x])==2)
-                throw std::exception("Carga horaria de "+to_string(_guias[i]->get_id())+" deve conter somente 0s ou 1s.");
-        std::fin >> acessibilidade;
-        if(ler_bool(acessibilidade)==2)
-            throw std::exception("Acessibilidade de "+to_string(_guias[i]->get_id())+" deve ser 0(falso) ou 1(verdadeiro).");
-        std::fin>>especialidade;
+            if(carga_horaria[x]!='1'&&carga_horaria[x]!='0'){
+                std::cout<<"Em "<<_guias[i]->get_id() << std::endl;
+                throw std::invalid_argument("Carga horaria deve conter somente 0s ou 1s.");
+            }
+        fin >> acessibilidade;
+        if(f.ler_bool(acessibilidade)==2){
+            std::cout<<"Em "<<_guias[i]->get_id() << std::endl;
+            throw std::invalid_argument("Acessibilidade deve ser 0(falso) ou 1(verdadeiro).");
+        }
+        fin>>especialidade;
         // especialidade recebe inteiros entre 1 e 5
-        if(ler_digito(especialidade)==0)
-            throw std::exception("Especialidade só permite inteiros entre 1 e 5.");
-        _guias[i]= new Guia(ler_int(salario)*(ler_digito(especialidade)+1)/2,carga_horaria,ler_bool(acessibilidade),ler_digito(especialidade));
+        if(f.ler_digito(especialidade)==0){
+            std::cout<<"Em "<<_guias[i]->get_id() << std::endl;
+            throw std::invalid_argument("Especialidade só permite inteiros entre 1 e 5.");
+        }
+        _guias[i]= new Guia(f.ler_int(salario)*(f.ler_digito(especialidade)+1)/2,carga_horaria,f.ler_bool(acessibilidade),f.ler_digito(especialidade));
     }
 }
 
-Gerente::Gerente(int salario,int numero_exposicoes,int numero_segurancas,int numero_guias):
+Gerente::Gerente(int salario,int numero_exposicoes,int numero_segurancas,int numero_guias, std::ifstream &fin):
     Pessoa(salario),_numero_exposicoes(numero_exposicoes),_numero_segurancas(numero_segurancas),_numero_guias(numero_guias)
     {
-        carregar_sistema();
+        carregar_sistema(fin);
     }
 
 void Gerente::descarregar_sistema(){
@@ -117,6 +145,11 @@ void Gerente::ver_exposicoes(){
     for(int i=0;i<_numero_exposicoes;i++){
         std::cout<<"Semana "<<i+1<<": ";
         std::cout<<_exposicoes[i]->get_nome()<<std::endl;
+        for(int j=0;j<_exposicoes[i]->get_numero_artistas();j++){
+            std::cout<<"Artista: "<<_exposicoes[i]->get_artistas()[j]->get_nome()<<std::endl;
+            for(int k=0;k<_exposicoes[i]->get_artistas()[j]->get_numero_obras();k++)
+                std::cout<<_exposicoes[i]->get_artistas()[j]->get_obras()[k]->get_nome() << std::endl; 
+        } 
     }
 }
 void Gerente::ver_segurancas(){
@@ -134,10 +167,10 @@ void Gerente::arquivar_obra(int ID_obra){
         for(int j=0;j<_exposicoes[i]->get_numero_artistas();j++)
             for(int k=0;k<_exposicoes[i]->get_artistas()[j]->get_numero_obras();k++)
                 if(_exposicoes[i]->get_artistas()[j]->get_obras()[k]->get_id()==ID_obra){
-                    _obras[k].set_arquivada(true);
+                    _exposicoes[i]->get_artistas()[j]->get_obras()[k]->set_arquivada(true);
                     return;
                 }
-    throw std::exception("ID inserido nao foi cadastrado!");
+    throw std::invalid_argument("ID inserido nao foi cadastrado!");
 }
 
 void Gerente::atribuir_funcionarios(){
@@ -146,7 +179,7 @@ void Gerente::atribuir_funcionarios(){
             //escolha do guia
             Guia* guia;
             for(int j=0;j<_numero_guias;j++){
-                if(_exposicoes[l]->calcular_popularidade()==_guias[j]->get_especialidade()){
+                if(_exposicoes[l]->get_popularidade()==_guias[j]->get_especialidade()){
                     if(_exposicoes[l]->get_acessibilidade() && !(_guias[j]->get_acessibilidade()))
                         continue;
                     guia=_guias[j];
@@ -154,7 +187,8 @@ void Gerente::atribuir_funcionarios(){
                 }
                 if(j==_numero_guias-1){
                     std::string dias[7]={"domingo","segunda","terca","quarta","quinta","sexta","sabado"};
-                    throw std::exception("Nao ha guias adequados suficientes para "+_exposicoes[l]->get_nome()+" em "+dias[i]+"!");
+                    std::cout<<"Em "<<_exposicoes[l]->get_nome() <<" em "<< dias[i]<< std::endl;
+                    throw std::invalid_argument("Nao ha guias adequados suficientes!");
                 }
             }
             _exposicoes[l]->get_vigilancia()[i][0]=guia->get_id();  //primeira posicao guarda o guia
@@ -162,7 +196,7 @@ void Gerente::atribuir_funcionarios(){
             //escolha dos segurancas
             Seguranca* seguranca;
             //horario diurno
-            int vigilancia_necessaria=_exposicoes[l]->calcular_popularidade();
+            int vigilancia_necessaria=_exposicoes[l]->get_popularidade();
             for(int j=0;j<_numero_segurancas;j++){
                 if(_segurancas[j]->get_carga_horaria()[i]=='1'){  //se o seguranca trabalha no dia da semana i
                     seguranca=_segurancas[j];  //escolhe seguranca
@@ -173,11 +207,12 @@ void Gerente::atribuir_funcionarios(){
                 }
                 if(j==_numero_segurancas-1){
                     std::string dias[7]={"domingo","segunda","terca","quarta","quinta","sexta","sabado"};
-                    throw std::exception("Nao ha segurancas adequados suficientes para "+_exposicoes[l]->get_nome()+" em "+dias[i]+"!");
+                    std::cout<<"Em "<<_exposicoes[l]->get_nome() <<" em "<< dias[i]<< std::endl;
+                    throw std::invalid_argument("Nao ha segurancas adequados suficientes!");
                 }
             }
             //horario noturno
-            vigilancia_necessaria=_exposicoes[l]->calcular_popularidade()/2;
+            vigilancia_necessaria=_exposicoes[l]->get_popularidade()/2;
             for(int j=0;j<_numero_segurancas;j++){
                 if(_segurancas[j]->get_carga_horaria()[i]=='1' && _segurancas[j]->get_horario_noturno()==true){ 
                     seguranca=_segurancas[j]; 
@@ -188,7 +223,8 @@ void Gerente::atribuir_funcionarios(){
                 }
                 if(j==_numero_segurancas-1){
                     std::string dias[7]={"domingo","segunda","terca","quarta","quinta","sexta","sabado"};
-                    throw std::exception("Nao ha segurancas adequados suficientes para "+_exposicoes[l]->get_nome()+" em "+dias[i]+" a noite!");
+                    std::cout<<"Em "<<_exposicoes[l]->get_nome() <<" em "<< dias[i]<< std::endl;
+                    throw std::invalid_argument("Nao ha segurancas adequados suficientes a noite!");
                 }
             }
         }

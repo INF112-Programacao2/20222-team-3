@@ -4,56 +4,57 @@
 5
 Modernismo Brasileiro
 3
-Tarsila do Amaral
 5
+1
+50
+Tarsila do Amaral
 4
 Bandeira do Divino
 Terra
 Os Operarios
 O Mamoeiro
 Anita Malfatti
-4
 3
 A Chinesa
 Samba
 O Onda
 Emiliano Di Cavalcanti
-4
 3
 Mulher do Véu
 Candangos
 O Homem e a Máquina
 Cubismo Brasileiro
 3
+4
+1
+40
 Candido Portinari
-5
 3
 Espantalho
 Paz
 VER NADA, ESCUTAR NADA, DIZER NADA
 Lasar Segall
 3
-3
 Aldeia Russa
 Mae Negra Entre Casas
 Menino com Lagartixas
 Vicente Monteiro
-3
 3
 Maternidade Indigena
 Pastor
 Pieta
 Abstracionismo Brasilerio
 3
+4
+1
+40
 Antonio Bandeira
-5
 4
 Cais Noturno
 A Catedral
 Ascensão das favelas azul
 Arvores Negras em Bonina
 Ibere Camargo
-3
 5
 Andamento I
 Andamento III
@@ -62,23 +63,22 @@ Desdobramento II
 Fantasmagoria
 Manabu Mane
 2
-2
 Fome
 Flor de Fogo
 Fauvismo 
 3
+3
+0
+25
 Inima Jose de Paula
-2
 3
 Paisagem
 Paisagem de Ouro Preto
 Primavera no Campo
 Mario Navarro da Costa
-2
 1
 Porto de Leixoes
 Arthur Timotheo da Costa
-1
 1
 Menino com Legumes
 70
@@ -114,4 +114,3 @@ Menino com Legumes
 1010101
 0
 1
-

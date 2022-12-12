@@ -1,5 +1,5 @@
 #include <iostream>
-#include <ifstream>
+#include <fstream>
 #include "Movimento.h"
 #include "Gerente.h"
 #include "Guia.h"
@@ -7,33 +7,11 @@
 #include "Exposicao.h"
 #include "Obra.h"
 #include "Artista.h"
-
-int ler_int(std::string str){
-    int num=0;
-    for(int i=0;i<str.size();i++){
-        if(!isdigit(str[i]))
-            return num;
-        num*=10;
-        num+=str[i]-'0';
-    }
-    return num;
-}
-
-int ler_digito(std::string str){
-    if(str.size()!=1 || str[0]-'0' < 1 || str[0]-'0' > 5)
-        return 0;
-    return str[0]-'0';
-}
-int ler_bool(std::string str){
-    if(str.size()!=1 || str[0]-'0' != 1 || str[0]-'0' != 0)
-        return 2;
-    return str[0]-'0';
-}
+#include "Funcoes.h"
 
 void menu_inicial()
 {
-    std::cout << "Bem Vindo" << std::endl;
-    std::cout << "Selecione uma da opcoes abaixo: ";
+    std::cout << "Selecione uma da opcoes abaixo: "<< std::endl;
     std::cout << "(1) Ver exposicoes" << std::endl;
     std::cout << "(2) Ver segurancas" << std::endl;
     std::cout << "(3) Ver guias" << std::endl;
@@ -56,24 +34,30 @@ void funcoes_menu(Gerente &gerente)
             continue;
         }
     
-        if(escolha="1"){
+        if(escolha=="1"){
             gerente.ver_exposicoes();
         }
-        if(escolha="2"){
+        if(escolha=="2"){
             gerente.ver_segurancas();
         }
-        if(escolha="3"){
+        if(escolha=="3"){
             gerente.ver_guias();
         }
-        if(escolha="4"){
+        if(escolha=="4"){
+            for(int i=0;i<gerente.get_numero_exposicoes();i++)
+                for(int j=0;j<gerente.get_exposicoes()[i]->get_numero_artistas();j++)
+                    gerente.get_exposicoes()[i]->get_artistas()[j]->ver_obras();
+            int id;
+            std::cout<<"Insira o ID:\n";
+            std::cin>>id;
             try{
-                gerente.arquivar_obra();
+                gerente.arquivar_obra(id);
             } 
             catch(std::invalid_argument &e){
                 std::cout<<e.what()<<std::endl;
             }
         }
-        if(escolha="5"){
+        if(escolha=="5"){
             try{
             gerente.atribuir_funcionarios();
             } 
@@ -91,39 +75,43 @@ void funcoes_menu(Gerente &gerente)
 }
 
 int main(){
-    ifstream fin("Dados.txt");
+    Funcoes f;
+    std::ifstream fin("Dados.txt");
     if(!fin.is_open()){
         std::cerr << "Erro ao abrir o arquivo" << std::endl;
         return 0;
     }
     std::string salario, numero_exposicoes, numero_segurancas, numero_guias;
-    std::getline(std::fin, salario);
-    if(ler_int(salario)==0){
+    std::getline(fin, salario);
+    if(f.ler_int(salario)==0){
         std::cout<<"Salario do gerente invalido.\n";
         return 0;
     }
-    std::getline(std::fin, numero_exposicoes);
-    if(ler_int(numero_exposicoes)==0){
+    std::getline(fin, numero_exposicoes);
+    if(f.ler_int(numero_exposicoes)==0){
         std::cout<<"Numero de exposicoes invalido.\n";
         return 0;
     }
-    std::getline(std::fin, numero_segurancas);
-    if(ler_int(numero_segurancas)==0){
+    std::getline(fin, numero_segurancas);
+    if(f.ler_int(numero_segurancas)==0){
         std::cout<<"Numero de segurancas invalido.\n";
         return 0;
     }
-    std::getline(std::fin, numero_guias);
-    if(ler_int(numero_guias)==0){
+    std::getline(fin, numero_guias);
+    if(f.ler_int(numero_guias)==0){
         std::cout<<"Numero de guias invalido.\n";
         return 0;
     }
+    Gerente *gerente;
     try{
-        Gerente gerente(ler_int(salario), ler_int(numero_exposicoes), ler_int(numero_segurancas), ler_int(numero_guias));
+        gerente=new Gerente(f.ler_int(salario), f.ler_int(numero_exposicoes), f.ler_int(numero_segurancas), f.ler_int(numero_guias), fin);
     }
-    catch(std::exception &e){
+    catch(std::invalid_argument &e){
         std::cout << e.what() << std::endl;
+        return 0;
     }
-    funcoes_menu(gerente);
+    funcoes_menu(*gerente);
     fin.close();
+    delete gerente;
     return 0;
 }
