@@ -95,7 +95,7 @@ int main(){
 
     //verifica se os valores inseridos sao validos 
     std::getline(fin, salario);
-    if(f.ler_int(salario)==-1 || f.ler_int(salario)==0){
+    if(f.ler_int(salario)==-1){
         std::cout<<"Salario do gerente invalido.\n";
         fin.close(); //fecha o arquivo
         return 0;

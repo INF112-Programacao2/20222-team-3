@@ -46,7 +46,7 @@ void Gerente::carregar_sistema(std::ifstream &fin){
 
     //verifica se os dados inseridos sao validos
     fin>>salario;
-    if(f.ler_int(salario)==-1 || f.ler_int(salario)==0)
+    if(f.ler_int(salario)==-1)
         throw std::invalid_argument("Salario invalido para segurancas.");
     for(int i=0; i<_numero_segurancas;i++)
     {
@@ -73,7 +73,7 @@ void Gerente::carregar_sistema(std::ifstream &fin){
     _guias=new Guia*[_numero_guias]; //aloca dinamicamente um vetor de guias
     //verifica se as informacoes inseridas sao validas
     fin >> salario;
-    if(f.ler_int(salario)==-1 || f.ler_int(salario)==0)
+    if(f.ler_int(salario)==-1)
         throw std::invalid_argument("Salario invalido para guias.");
     for(int i = 0; i < _numero_guias; i++)
     {

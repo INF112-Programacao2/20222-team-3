@@ -1,11 +1,13 @@
 #include"Funcoes.h"
 
 int Funcoes::ler_int(std::string str){
+    if(str=="")
+        return -1;
     int num=0;
     for(int i=0;i<str.size();i++){ //percorre cada posicao da string
         if(!isdigit(str[i])) //se a posicao nao e um digito
             return -1; //retorna -1
-        num*=10; //multiplica o numero por 10 caso seja um numero com mais de um alagarismo
+        num*=10; //multiplica o numero por 10 caso seja um numero com mais de um algarismo
         num+=str[i]-'0'; //converte para inteiro
     }
     return num;
