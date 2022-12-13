@@ -97,21 +97,25 @@ int main(){
     std::getline(fin, salario);
     if(f.ler_int(salario)==-1 || f.ler_int(salario)==0){
         std::cout<<"Salario do gerente invalido.\n";
+        fin.close(); //fecha o arquivo
         return 0;
     }
     std::getline(fin, numero_exposicoes);
     if(f.ler_int(numero_exposicoes)==-1){
         std::cout<<"Numero de exposicoes invalido.\n";
+        fin.close(); //fecha o arquivo
         return 0;
     }
     std::getline(fin, numero_segurancas);
     if(f.ler_int(numero_segurancas)==-1){
         std::cout<<"Numero de segurancas invalido.\n";
+        fin.close(); //fecha o arquivo
         return 0;
     }
     std::getline(fin, numero_guias);
     if(f.ler_int(numero_guias)==-1){
         std::cout<<"Numero de guias invalido.\n";
+        fin.close(); //fecha o arquivo
         return 0;
     }
     Gerente *gerente; //cria um ponteiro do tipo gerente
