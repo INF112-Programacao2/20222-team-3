@@ -20,7 +20,7 @@ void Movimento::carregar_sistema(std::ifstream &fin){
             std::string numero_obras; //inseridondo o numero de obras, que será usado para alocar as obras nos artistas 
             std::getline(fin,nome);
             fin>>numero_obras;
-            if(f.ler_int(numero_obras)==0){
+            if(f.ler_int(numero_obras)==-1){
                 std::cout<<"Em "<<nome<< std::endl;
                 throw std::invalid_argument("Numero de obras invalido.");
             }

@@ -2,6 +2,8 @@
 
 int Funcoes::ler_int(std::string str){
     int num=0;
+    if(!isdigit(str[0]))
+        return -1;
     for(int i=0;i<str.size();i++){
         if(!isdigit(str[i]))
             return num;

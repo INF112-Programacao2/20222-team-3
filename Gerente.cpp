@@ -15,12 +15,12 @@ void Gerente::carregar_sistema(std::ifstream &fin){
         std::string visitantes;
         std::getline(fin, nome);
         fin>>numero_artistas;
-        if(f.ler_int(numero_artistas)==0){
+        if(f.ler_int(numero_artistas)==-1){
             std::cout<<"Em "<<nome << std::endl;
             throw std::invalid_argument("Numero de artistas invalido.");
         }
         fin>>popularidade;
-        if(f.ler_int(popularidade)==0){
+        if(f.ler_int(popularidade)==-1){
             std::cout<<"Em "<<nome << std::endl;
             throw std::invalid_argument("Popularidade invalida.");
         }
@@ -30,7 +30,7 @@ void Gerente::carregar_sistema(std::ifstream &fin){
             throw std::invalid_argument("Acessibilidade  deve ser 0(falso) ou 1(verdadeiro).");
         }
         fin>>visitantes;
-        if(f.ler_int(visitantes)==0){
+        if(f.ler_int(visitantes)==-1){
             std::cout<<"Em "<<nome << std::endl;
             throw std::invalid_argument("Numero de visitantes invalido.");
         }
@@ -41,7 +41,7 @@ void Gerente::carregar_sistema(std::ifstream &fin){
 
     _segurancas=new Seguranca*[_numero_segurancas];
     fin>>salario;
-    if(f.ler_int(salario)==0)
+    if(f.ler_int(salario)==-1)
         throw std::invalid_argument("Salario invalido para segurancas.");
     for(int i=0; i<_numero_segurancas;i++)
     {
@@ -66,7 +66,7 @@ void Gerente::carregar_sistema(std::ifstream &fin){
 
     _guias=new Guia*[_numero_guias];
     fin >> salario;
-    if(f.ler_int(salario)==0)
+    if(f.ler_int(salario)==-1)
         throw std::invalid_argument("Salario invalido para guias.");
     for(int i = 0; i < _numero_guias; i++)
     {

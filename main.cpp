@@ -83,22 +83,22 @@ int main(){
     }
     std::string salario, numero_exposicoes, numero_segurancas, numero_guias;
     std::getline(fin, salario);
-    if(f.ler_int(salario)==0){
+    if(f.ler_int(salario)==-1){
         std::cout<<"Salario do gerente invalido.\n";
         return 0;
     }
     std::getline(fin, numero_exposicoes);
-    if(f.ler_int(numero_exposicoes)==0){
+    if(f.ler_int(numero_exposicoes)==-1){
         std::cout<<"Numero de exposicoes invalido.\n";
         return 0;
     }
     std::getline(fin, numero_segurancas);
-    if(f.ler_int(numero_segurancas)==0){
+    if(f.ler_int(numero_segurancas)==-1){
         std::cout<<"Numero de segurancas invalido.\n";
         return 0;
     }
     std::getline(fin, numero_guias);
-    if(f.ler_int(numero_guias)==0){
+    if(f.ler_int(numero_guias)==-1){
         std::cout<<"Numero de guias invalido.\n";
         return 0;
     }
