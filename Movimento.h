@@ -2,28 +2,27 @@
 
 #include <string>
 #include <fstream>
-#include<exception>
+#include <exception>
 #include "Artista.h"
 
 class Movimento
 {
-    private:
-        static int _id_geral; //próximo id a ser definido para o prox objeto do tipo movimento, variavel compartilhada entre todos os objetos
-        int _id; //id que será utilizado para reconhecer o objeto
-        std::string _nome; //nome do movimento
-        int _numero_artistas; // quantidade de artistas daquele movimento
-        int _popularidade;
-        Artista** _artistas; //ponteiro de ponteiro de artistas para alocar dinamicamente os artistas que fazem parte do movimento
-    public:
-        Movimento(std::string nome, int numero_artistas, int popularidade); //₢osntrutor que recebe nome, e numero de artistas 
-        void carregar_sistema(std::ifstream &fin);  //para preencher o acervo de artistas e obras
-        virtual ~Movimento(); // destrutor da classe
-        int get_numero_artistas(); //retorna o numero de artistas
-        Artista** get_artistas();
-        int get_id();
-        std::string get_nome();
-        int get_popularidade();
-        void ver_obras(); //imprime as obras do movimento
-        void ver_artistas();//imprime os artistas do movimentp
-
+private:
+    static int _id_geral; // id geral dos movimentos
+    int _id;              // id do movimento
+    std::string _nome;    // nome do movimento
+    int _numero_artistas; // numero artistas do movimento
+    int _popularidade;    // popularidade do movimento
+    Artista **_artistas;  // vetor de artistas
+public:
+    Movimento(std::string nome, int numero_artistas, int popularidade);
+    virtual ~Movimento();
+    void carregar_sistema(std::ifstream &fin); // metodo para carregar o sistema com os artistas do movimento
+    int get_numero_artistas();                 // retorna o numero de artistas
+    Artista **get_artistas();                  // retorna o ponteiro do vetor de artistas
+    int get_id();                              // retorna o id
+    std::string get_nome();                    // retorna o nome
+    int get_popularidade();                    // retorna a popularidade
+    void ver_obras();                          // exibe as obras do movimento
+    void ver_artistas();                       // exibe os artistas do movimento
 };

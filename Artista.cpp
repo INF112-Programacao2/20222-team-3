@@ -1,29 +1,29 @@
 #include "Artista.h"
 #include "Obra.h"
 
+//inicializa a variavel estatica
 int Artista::_id_geral = 200;
 
 Artista::Artista(std::string nome,int numero_obras)
-{ // metodo construtor
-    _id = _id_geral++;
+{
+    _id = _id_geral++; //incrementa o contador da variavel estatistica e define como ID do artista
     _numero_obras = numero_obras;
     _nome = nome;
 };
 
 void Artista::carregar_sistema(std::ifstream &fin)
-{                                       // carregando sistema em conjunto com a classe obras
-    _obras = new Obra *[_numero_obras]; // construtor para obras
+{                                       
+    _obras = new Obra *[_numero_obras]; //aloca dinamicamente um vetor de obras
     std::string nome;
     for (int i = 0; i < _numero_obras; i++)
     {
         std::getline(fin, nome);
-        _obras[i] = new Obra(nome);
+        _obras[i] = new Obra(nome); //preenche da posicao do vetor com um objeto Obra
     }
-    
 }
 
 Artista::~Artista()
-{ // metodo destrutor
+{
     for (int i = 0; i < _numero_obras; i++)
     {
         delete _obras[i];
@@ -32,7 +32,7 @@ Artista::~Artista()
 };
 
 void Artista::ver_obras()
-{ // exibir obras do artista
+{
     for (int i = 0; i < _numero_obras; i++)
     {
         if(!_obras[i]->get_arquivada()) //se a obra nao estiver arquivda
@@ -41,20 +41,20 @@ void Artista::ver_obras()
 };
 
 int Artista::get_numero_obras()
-{ // retorno do numero de obras
+{ 
     return _numero_obras;
 };
 
 int Artista::get_id()
-{ // retorno do id do artista
+{
     return _id;
 };
 
 std::string Artista::get_nome()
-{ // retorno nome do artista
+{ 
     return _nome;
 };
 
 Obra** Artista::get_obras(){
     return _obras;
-}
+};

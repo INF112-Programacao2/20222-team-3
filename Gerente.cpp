@@ -2,10 +2,10 @@
 #include "Funcoes.h"
 
 void Gerente::carregar_sistema(std::ifstream &fin){
-    Funcoes f;
+    Funcoes f; //cria a variavel que sera usada na chamada das funcoess
     std::string salario; 
     std::string carga_horaria; 
-    _exposicoes=new Exposicao*[_numero_exposicoes];
+    _exposicoes=new Exposicao*[_numero_exposicoes]; //aloca dinamicamente um vetor de exposicoes
     for(int i=0;i<_numero_exposicoes;i++){
         std::string nome;
         std::string numero_artistas;
@@ -14,6 +14,8 @@ void Gerente::carregar_sistema(std::ifstream &fin){
         std::string acessibilidade;
         std::string visitantes;
         std::getline(fin, nome);
+
+        //verifica se os valores inseridos sao validos
         fin>>numero_artistas;
         if(f.ler_int(numero_artistas)==-1){
             std::cout<<"Em "<<nome << std::endl;
@@ -34,14 +36,17 @@ void Gerente::carregar_sistema(std::ifstream &fin){
             std::cout<<"Em "<<nome << std::endl;
             throw std::invalid_argument("Numero de visitantes invalido.");
         }
-        fin.ignore();
+        fin.ignore(); //necessario para a entrada de dados ocorrer corretamente
+        //aloca um objeto Exposicao em cada posicao e chama a funcao carregar sistema para essa exposicao
         _exposicoes[i]=new Exposicao(nome,f.ler_int(numero_artistas),f.ler_int(popularidade),semana,f.ler_bool(acessibilidade),f.ler_int(visitantes));
         _exposicoes[i]->carregar_sistema(fin);
     }
 
-    _segurancas=new Seguranca*[_numero_segurancas];
+    _segurancas=new Seguranca*[_numero_segurancas]; //aloca dinamicamnete um vetor de segurancas
+
+    //verifica se os dados inseridos sao validos
     fin>>salario;
-    if(f.ler_int(salario)==-1)
+    if(f.ler_int(salario)==-1 || f.ler_int(salario)==0)
         throw std::invalid_argument("Salario invalido para segurancas.");
     for(int i=0; i<_numero_segurancas;i++)
     {
@@ -61,12 +66,14 @@ void Gerente::carregar_sistema(std::ifstream &fin){
             std::cout<<"Em "<<_segurancas[i]->get_id() << std::endl;
             throw std::invalid_argument("Horario noturno  deve ser 0(falso) ou 1(verdadeiro).");
         }
+        //aloca uma objeto Seguranca em cada posicao do vetor
         _segurancas[i]= new Seguranca(f.ler_int(salario),carga_horaria,f.ler_bool(horario_noturno));
     }
 
-    _guias=new Guia*[_numero_guias];
+    _guias=new Guia*[_numero_guias]; //aloca dinamicamente um vetor de guias
+    //verifica se as informacoes inseridas sao validas
     fin >> salario;
-    if(f.ler_int(salario)==-1)
+    if(f.ler_int(salario)==-1 || f.ler_int(salario)==0)
         throw std::invalid_argument("Salario invalido para guias.");
     for(int i = 0; i < _numero_guias; i++)
     {
@@ -93,7 +100,8 @@ void Gerente::carregar_sistema(std::ifstream &fin){
             std::cout<<"Em "<<_guias[i]->get_id() << std::endl;
             throw std::invalid_argument("Especialidade só permite inteiros entre 1 e 5.");
         }
-        _guias[i]= new Guia(f.ler_int(salario)*(f.ler_digito(especialidade)+1)/2,carga_horaria,f.ler_bool(acessibilidade),f.ler_digito(especialidade));
+        //aloca um objeto Guia em cada posicao do vetor
+        _guias[i]= new Guia(f.ler_int(salario),carga_horaria,f.ler_bool(acessibilidade),f.ler_digito(especialidade));
     }
 }
 
@@ -138,33 +146,38 @@ int Gerente::get_numero_guias(){
     return _numero_guias;
 }
 void Gerente::ver_exposicoes(){
+    //acessa cada exposicao e exibe os artistas e obras presentes nela
     for(int i=0;i<_numero_exposicoes;i++){
         std::cout<<"Semana "<<i+1<<": ";
         std::cout<<_exposicoes[i]->get_nome()<<std::endl;
         for(int j=0;j<_exposicoes[i]->get_numero_artistas();j++){
             std::cout<<"Artista: "<<_exposicoes[i]->get_artistas()[j]->get_nome()<<std::endl;
             for(int k=0;k<_exposicoes[i]->get_artistas()[j]->get_numero_obras();k++)
-                if(!(_exposicoes[i]->get_artistas()[j]->get_obras()[k]->get_arquivada())) //se nao esta arquivada
+                if(!(_exposicoes[i]->get_artistas()[j]->get_obras()[k]->get_arquivada())) //se a obra nao esta arquivada
                     std::cout<<_exposicoes[i]->get_artistas()[j]->get_obras()[k]->get_nome() << std::endl; 
-        } 
+        }
+        std::cout << std::endl; 
     }
 }
 void Gerente::ver_segurancas(){
+    //percorre o vetor de segurancas e exibe os IDs
     for(int i=0;i<_numero_segurancas;i++)
         std::cout<<_segurancas[i]->get_id()<<" ";
     std::cout<<std::endl;
 }
 void Gerente::ver_guias(){
+    //percorre o vetor de guias e exibe os IDs
     for(int i=0;i<_numero_guias;i++)
         std::cout<<_guias[i]->get_id()<<" ";
     std::cout<<std::endl;
 }
 void Gerente::arquivar_obra(int ID_obra){
+    //percorre o vetor de exposicoes, artista e obras ate achar a obra do ID correspondente
     for(int i=0;i<_numero_exposicoes;i++)
         for(int j=0;j<_exposicoes[i]->get_numero_artistas();j++)
             for(int k=0;k<_exposicoes[i]->get_artistas()[j]->get_numero_obras();k++)
                 if(_exposicoes[i]->get_artistas()[j]->get_obras()[k]->get_id()==ID_obra){
-                    _exposicoes[i]->get_artistas()[j]->get_obras()[k]->set_arquivada(true);
+                    _exposicoes[i]->get_artistas()[j]->get_obras()[k]->set_arquivada(true); //arquiva a obra
                     return;
                 }
     throw std::invalid_argument("ID inserido nao foi cadastrado!");
@@ -231,27 +244,32 @@ void Gerente::atribuir_funcionarios(){
         _exposicoes[l]->ver_vigilancia_noturna();
     }
 }
+
 int Gerente::calcular_salario(){
-    return get_salario()*7*(28-4); //trabalha 7 horas por dia, nos 28 dias do mes menos os 4 domingos
+    return get_salario()*(28-4); //trabalha 7 horas por dia, nos 28 dias do mes menos os 4 domingos
 }
+
 int Gerente::calcular_lucro(){
     int receita=0,despesa=0;
+    //calcula e exibe o lucro com visitantes de cada exposicao
     for(int i=0;i<_numero_exposicoes;i++){
         int receita_exposicao=_exposicoes[i]->calcular_preco()*_exposicoes[i]->get_visitantes();
         receita+=receita_exposicao;
         std::cout<<"Receita da exposicao '"<<_exposicoes[i]->get_nome()<<"' foi: "<<receita_exposicao<<std::endl;
     }
+    //calcula o salario de cada seguranca e acumula nas despesas
     for(int i=0;i<_numero_segurancas;i++){
         int despesa_seguranca=_segurancas[i]->calcular_salario();
         despesa+=despesa_seguranca;
-        std::cout<<"Despesa com seguranca "<<_segurancas[i]->get_id()<<" foi: "<<despesa_seguranca<<std::endl;
+        std::cout<<"Despesa com seguranca "<<_segurancas[i]->get_id()<<" foi: "<<despesa_seguranca<<std::endl; //exibe o salario
     }
+    //calcula e exibe o salario de cada guia e nas despesas
     for(int i=0;i<_numero_guias;i++){
         int despesa_guia=_guias[i]->calcular_salario();
         despesa+=despesa_guia;
-        std::cout<<"Despesa com guia "<<_guias[i]->get_id()<<" foi: "<<despesa_guia<<std::endl;
+        std::cout<<"Despesa com guia "<<_guias[i]->get_id()<<" foi: "<<despesa_guia<<std::endl; //exibe o salario
     }
-    despesa+=calcular_salario(); //salario do gerente
-    std::cout<<"Despesa com o gerente foi: "<<calcular_salario()<<std::endl;
+    despesa+=calcular_salario(); //calcula o salario do gerente e acumula nas despesas
+    std::cout<<"Despesa com o gerente foi: "<<calcular_salario()<<std::endl; //exibe o salario
     return receita-despesa;
 }

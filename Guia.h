@@ -7,18 +7,13 @@
 class Guia : public Funcionario
 {
 private:
-    // Dados privados
-    bool _acessibilidade;
-    int _especialidade;
+    bool _acessibilidade; // define se o guia e capacitado para fazer acecssibilidade
+    int _especialidade;   // define o nivel de especializacao do guia
 
 public:
-    // Construtor
-    Guia(int salario,std::string carga_horaria,bool acessibilidade,int especialidade);
-    // Destrutor
+    Guia(int salario, std::string carga_horaria, bool acessibilidade, int especialidade);
     virtual ~Guia();
-    // Métodos
-
-    bool get_acessibilidade();
-    int get_especialidade();
-    int calcular_salario();
+    bool get_acessibilidade(); // retorna se o guia e capacitado
+    int get_especialidade();   // retorna a espcialidade
+    int calcular_salario();    // calcula o salario
 };

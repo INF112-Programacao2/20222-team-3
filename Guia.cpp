@@ -9,21 +9,19 @@ Guia::~Guia(){};
 
 int Guia::get_especialidade()
 {
-    // Retorna o valor da especialidade
-    return _especialidade;
+    return _especialidade;     // retorna o valor da especialidade
 };
 bool Guia::get_acessibilidade()
-{ // Retorna se true ou false para acessibilidade
-    return _acessibilidade;
+{
+    return _acessibilidade; //retorna se true ou false para acessibilidade
 };
 
 int Guia::calcular_salario()
 {
-    // uma variavel temporaria com o valor de vezes em que ele trabalhou na semana
+    // Quantidade de dias trabalhados (respresentado por '1')
     int cont=0;
     for(int i=0;i<get_carga_horaria().size();i++)
-        if(get_carga_horaria()[i]=='1')
-            cont++;
-    // salario base X a quantidade de dias por semana que ele trabalha X 4 semanas(mês)
-    return get_salario() * cont * 4;
+        if(get_carga_horaria()[i]=='1') //se a posicao da string e 1 ele trabalha naquele dia
+            cont++; //incrementa contador
+    return get_salario() * cont * 4 + (200 * _especialidade);
 };

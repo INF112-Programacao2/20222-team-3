@@ -1,10 +1,11 @@
 #include "Obra.h"
 
+//inicializa a variavel estatica
 int Obra::_id_geral = 100;
 
-Obra::Obra(std::string nome) // metodo construtor
+Obra::Obra(std::string nome)
 {
-    _id = _id_geral++;
+    _id = _id_geral++; //incrementa o contador da variavel estatistica e define como ID da obra
     _arquivada = false;
     _nome = nome;
 }
@@ -25,5 +26,5 @@ void Obra::set_arquivada(bool arquivada)
 { // alteracao de arquivada
     _arquivada = arquivada;
 }
-Obra::~Obra() // metodo destrutor
-    {};
+Obra::~Obra()
+{};

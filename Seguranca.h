@@ -5,15 +5,11 @@
 class Seguranca : public Funcionario
 {
 private:
-//métodos privados
-    bool _horario_noturno;
+    bool _horario_noturno; // define se o seguranca trabalha a noite
 
 public:
-    // Construtor
-    Seguranca(int salario,std::string carga_horaria,bool horario_noturno);
-    // Destrutor
+    Seguranca(int salario, std::string carga_horaria, bool horario_noturno);
     virtual ~Seguranca();
-    // Métodos
-    virtual int calcular_salario();
-    bool get_horario_noturno();
+    virtual int calcular_salario(); // calcula o salario
+    bool get_horario_noturno();     // retorna se o seguranca trabalha a noite ou nao
 };

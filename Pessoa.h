@@ -4,20 +4,15 @@
 class Pessoa
 {
 private:
-    // Dados Privados
-    static int _id_geral;
-    int _id;
-    int _salario;
+    static int _id_geral; // id geral das pessoas
+    int _id;              // id da pessoa
+    int _salario;         // salario da pessoa
 
 public:
-    // Construtor
     Pessoa(int salario);
-    // Destrutor
     virtual ~Pessoa();
 
-    // Métodos Públicos
-    int get_salario();
-    int get_id();
-    // Interface
-    virtual int calcular_salario() = 0;
+    int get_salario();                  // retorna o salario
+    int get_id();                       // retorna o id
+    virtual int calcular_salario() = 0; // usado para calcular o salario, implementado nas classes derivadas
 };

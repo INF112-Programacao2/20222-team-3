@@ -1,4 +1,4 @@
-125
+250
 4
 8
 5
@@ -81,7 +81,11 @@ Porto de Leixoes
 Arthur Timotheo da Costa
 1
 Menino com Legumes
-70
+100
+1111111
+0
+1111111
+0
 1111111
 1
 1111111
@@ -94,11 +98,7 @@ Menino com Legumes
 1
 1111111
 1
-1111111
-1
-1111111
-1
-75
+125
 1111111
 1
 4
