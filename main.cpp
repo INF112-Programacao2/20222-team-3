@@ -66,7 +66,11 @@ void funcoes_menu(Gerente &gerente)
             }
         }
         if(escolha=="6"){
-            std::cout<<"RS "<<gerente.calcular_lucro()<<std::endl;
+            int lucro=gerente.calcular_lucro();
+            if(lucro>=0)
+                std::cout<<"Lucro previsto: "<<lucro<<std::endl;
+            else
+                std::cout<<"Prejuizo previsto: "<<-1*lucro<<std::endl;
         }
         if(escolha=="7"){
             break;

@@ -231,17 +231,27 @@ void Gerente::atribuir_funcionarios(){
         _exposicoes[l]->ver_vigilancia_noturna();
     }
 }
-
-int Gerente::calcular_lucro(){
-    int receita=0,despesa=0;
-    for(int i=0;i<_numero_exposicoes;i++)
-        receita+=_exposicoes[i]->calcular_preco()*_exposicoes[i]->get_visitantes();
-    for(int i=0;i<_numero_segurancas;i++)
-        despesa+=_segurancas[i]->calcular_salario();
-    for(int i=0;i<_numero_guias;i++)
-        despesa+=_guias[i]->calcular_salario();
-    return receita-despesa;
-}
 int Gerente::calcular_salario(){
     return get_salario()*7*(28-4); //trabalha 7 horas por dia, nos 28 dias do mes menos os 4 domingos
+}
+int Gerente::calcular_lucro(){
+    int receita=0,despesa=0;
+    for(int i=0;i<_numero_exposicoes;i++){
+        int receita_exposicao=_exposicoes[i]->calcular_preco()*_exposicoes[i]->get_visitantes();
+        receita+=receita_exposicao;
+        std::cout<<"Receita da exposicao '"<<_exposicoes[i]->get_nome()<<"' foi: "<<receita_exposicao<<std::endl;
+    }
+    for(int i=0;i<_numero_segurancas;i++){
+        int despesa_seguranca=_segurancas[i]->calcular_salario();
+        despesa+=despesa_seguranca;
+        std::cout<<"Despesa com seguranca "<<_segurancas[i]->get_id()<<" foi: "<<despesa_seguranca<<std::endl;
+    }
+    for(int i=0;i<_numero_guias;i++){
+        int despesa_guia=_guias[i]->calcular_salario();
+        despesa+=despesa_guia;
+        std::cout<<"Despesa com guia "<<_guias[i]->get_id()<<" foi: "<<despesa_guia<<std::endl;
+    }
+    despesa+=calcular_salario(); //salario do gerente
+    std::cout<<"Despesa com o gerente foi: "<<calcular_salario()<<std::endl;
+    return receita-despesa;
 }
