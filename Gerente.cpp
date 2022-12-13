@@ -53,17 +53,17 @@ void Gerente::carregar_sistema(std::ifstream &fin){
         std::string horario_noturno;
         fin>>carga_horaria;
         if(carga_horaria.size()!=7){
-            std::cout<<"Em "<<_segurancas[i]->get_id() << std::endl;
+            std::cout<<"No "<<i+1<<"o seguranca"<<std::endl;
             throw std::invalid_argument("Carga horaria deve ter 7 numeros(0s ou 1s).");
         }
         for(int x=0;x<7;x++)
             if(carga_horaria[x]!='1'&&carga_horaria[x]!='0'){
-                std::cout<<"Em "<<_segurancas[i]->get_id() << std::endl;
+                std::cout<<"No "<<i+1<<"o seguranca"<<std::endl;
                 throw std::invalid_argument("Carga horaria deve conter somente 0s ou 1s.");
             }
         fin>>horario_noturno;
         if(f.ler_bool(horario_noturno)==2){
-            std::cout<<"Em "<<_segurancas[i]->get_id() << std::endl;
+            std::cout<<"No "<<i+1<<"o seguranca"<<std::endl;
             throw std::invalid_argument("Horario noturno  deve ser 0(falso) ou 1(verdadeiro).");
         }
         //aloca uma objeto Seguranca em cada posicao do vetor
@@ -81,23 +81,23 @@ void Gerente::carregar_sistema(std::ifstream &fin){
         std::string especialidade;
         fin >> carga_horaria;
         if(carga_horaria.size()!=7){
-            std::cout<<"Em "<<_guias[i]->get_id() << std::endl;
+            std::cout<<"No "<<i+1<<"o guia"<<std::endl;
             throw std::invalid_argument("Carga horaria deve ter 7 numeros(0s ou 1s).");
         }
         for(int x=0;x<7;x++)
             if(carga_horaria[x]!='1'&&carga_horaria[x]!='0'){
-                std::cout<<"Em "<<_guias[i]->get_id() << std::endl;
+                std::cout<<"No "<<i+1<<"o guia"<<std::endl;
                 throw std::invalid_argument("Carga horaria deve conter somente 0s ou 1s.");
             }
         fin >> acessibilidade;
         if(f.ler_bool(acessibilidade)==2){
-            std::cout<<"Em "<<_guias[i]->get_id() << std::endl;
+            std::cout<<"No "<<i+1<<"o guia"<<std::endl;
             throw std::invalid_argument("Acessibilidade deve ser 0(falso) ou 1(verdadeiro).");
         }
         fin>>especialidade;
         // especialidade recebe inteiros entre 1 e 5
         if(f.ler_digito(especialidade)==0){
-            std::cout<<"Em "<<_guias[i]->get_id() << std::endl;
+            std::cout<<"No "<<i+1<<"o guia"<<std::endl;
             throw std::invalid_argument("Especialidade só permite inteiros entre 1 e 5.");
         }
         //aloca um objeto Guia em cada posicao do vetor
